@@ -20,6 +20,10 @@
 
     <properties>
         <version.nexus.index>2</version.nexus.index>
+        
+        <windup.scm.connection>scm:git:https://github.com/windup/windup-distribution.git</windup.scm.connection>
+        <windup.developer.connection>scm:git:git@github.com:windup/windup-distribution.git</windup.developer.connection>
+        <windup.scm.url>http://github.com/windup/windup-distribution</windup.scm.url>
     </properties>
 
     <build>
