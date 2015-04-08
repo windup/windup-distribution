@@ -44,7 +44,7 @@
       </dependencySet>
 
       <dependencySet>
-         <outputDirectory>/rules</outputDirectory>
+         <outputDirectory>/rules/migration-core</outputDirectory>
          <useProjectArtifact>false</useProjectArtifact>
          <unpack>true</unpack>
          <includes>
