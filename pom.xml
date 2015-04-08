@@ -20,7 +20,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <version.nexus.index>2</version.nexus.index>
+        <version.nexus.index>3-SNAPSHOT</version.nexus.index>
         <version.windup>${project.version}</version.windup>
         <version.furnace>2.15.2.Final</version.furnace>
 
