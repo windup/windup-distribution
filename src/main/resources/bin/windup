@@ -160,6 +160,25 @@ if $cygwin; then
     HOME=`cygpath --path --windows "$HOME"`
 fi
 
+# If there is update prepared (.update directory), copy files from it
+if [ -e "$WINDUP_HOME/.update" ] ; then
+  rm -rf $WINDUP_HOME/addons
+  cp -rf $WINDUP_HOME/.update/addons $WINDUP_HOME/addons
+
+  rm -rf $WINDUP_HOME/bin
+  cp -rf $WINDUP_HOME/.update/bin $WINDUP_HOME/bin
+
+  rm -rf $WINDUP_HOME/lib
+  cp -rf $WINDUP_HOME/.update/lib $WINDUP_HOME/lib
+  
+  rm -rf $WINDUP_HOME/rules/migration-core
+  cp -rf $WINDUP_HOME/.update/rules/* $WINDUP_HOME/rules
+  
+  rm -rf $WINDUP_HOME/.update
+  echo "UPDATE IS COMPLETE. PLEASE RUN WINDUP AGAIN, EXITING NOW."
+  exit 0
+fi
+
 #
 if [ -r "$WINDUP_HOME/addons/" ] ; then
   ADDONS_DIR="--immutableAddonDir $WINDUP_HOME/addons/"
