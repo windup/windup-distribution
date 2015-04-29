@@ -1,0 +1,25 @@
+= Windup Distribution
+
+== Overview
+
+This project builds the Windup distribution ZIP file. It includes all launch scripts, batch files, libraries, JARs, add-ons, and configuration files for running Windup.
+
+This projects contains dependencies on the following projects, which must be built first.
+
+* https://github.com/windup/windup-rulesets[windup-rulesets]: This project contains the Windup rules.
+* https://github.com/windup/windup[windup]: This project contains the Windup core source code.
+
+More detailed instructions are located here: https://github.com/windup/windup/wiki/Dev-Build-Windup-from-Source[Build Windup from Source].
+
+== Build the Project
+
+To build this project, type:
+
+        mvn clean install
+
+This creates a `windup-distribution-<VERSION>-offline.zip` file in the `windup-distribution/target/` directory.
+
+== Additional Resources
+
+* Follow the https://github.com/windup/windup/wiki/Get-Involved[Get Involved] in Windup wiki.
+
