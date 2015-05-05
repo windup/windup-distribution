@@ -3,7 +3,8 @@
 <!-- ~ Copyright 2012 Red Hat, Inc. and/or its affiliates. ~ ~ Licensed under the Eclipse Public License version 1.0, available 
     at ~ http://www.eclipse.org/legal/epl-v10.html -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -22,7 +23,7 @@
     <properties>
         <version.nexus.index>3-SNAPSHOT</version.nexus.index>
         <version.windup>${project.version}</version.windup>
-        <version.furnace>2.15.2.Final</version.furnace>
+        <version.forge>2.15.2.Final</version.forge>
 
         <windup.scm.connection>scm:git:https://github.com/windup/windup-distribution.git</windup.scm.connection>
         <windup.developer.connection>scm:git:git@github.com:windup/windup-distribution.git</windup.developer.connection>
@@ -70,15 +71,15 @@
                         <configuration>
                             <addonRepository>${project.build.directory}/addons</addonRepository>
                             <addonIds>
-                                <addonId>org.jboss.forge.addon:addon-manager,${version.furnace}</addonId>
-                                <addonId>org.jboss.forge.addon:maven,${version.furnace}</addonId>
-                                <addonId>org.jboss.forge.addon:projects,${version.furnace}</addonId>
-                                <addonId>org.jboss.forge.addon:shell,${version.furnace}</addonId>
+                                <addonId>org.jboss.forge.addon:addon-manager,${version.forge}</addonId>
+                                <addonId>org.jboss.forge.addon:maven,${version.forge}</addonId>
+                                <addonId>org.jboss.forge.addon:projects,${version.forge}</addonId>
+                                <addonId>org.jboss.forge.addon:shell,${version.forge}</addonId>
                                 <addonId>org.jboss.windup.ui:windup-ui,${project.version}</addonId>
                                 <addonId>org.jboss.windup.rules.apps:windup-rules-java,${project.version}</addonId>
                                 <addonId>org.jboss.windup.rules.apps:windup-rules-java-project,${project.version}</addonId>
                                 <addonId>org.jboss.windup.rules.apps:windup-rules-java-ee,${project.version}</addonId>
-                               	<addonId>org.jboss.windup:windup-tooling,${project.version}</addonId>
+                                <addonId>org.jboss.windup:windup-tooling,${project.version}</addonId>
                             </addonIds>
                         </configuration>
                     </execution>
