@@ -156,6 +156,26 @@ goto runWindup
 if exist "%WINDUP_HOME%\addons" set ADDONS_DIR=--immutableAddonDir "%WINDUP_HOME%\addons"
 set WINDUP_MAIN_CLASS=org.jboss.windup.bootstrap.Bootstrap
 
+@REM If there is update prepared (.update directory), copy files from it
+if exist "%WINDUP_HOME%\.update" (
+  rmdir /S/Q  "%WINDUP_HOME%\addons"
+  xcopy /s /y "%WINDUP_HOME%\.update\addons\*" "%WINDUP_HOME%\addons\*"
+
+  rmdir /S/Q  "%WINDUP_HOME%\bin"
+  xcopy /s /y "%WINDUP_HOME%\.update\bin\*" "%WINDUP_HOME%\bin\*"
+
+  rmdir /S/Q  "%WINDUP_HOME%\lib"
+  xcopy /s /y "%WINDUP_HOME%\.update\lib\*" "%WINDUP_HOME%\lib\*"
+  
+  rmdir /S/Q  "%WINDUP_HOME%\rules\migration-core"
+  xcopy /s /y "%WINDUP_HOME%\.update\rules\*" "%WINDUP_HOME%\rules\*"
+
+  rmdir /S/Q  "%WINDUP_HOME%\.update"
+  echo "UPDATE IS COMPLETE. PLEASE RUN WINDUP AGAIN, EXITING NOW."
+  exit /b
+) 
+
+
 @REM MAX_MEMORY - Maximum Java Heap (example: 2048m)
 @REM MAX_PERM_SIZE - Maximum Permgen size (example: 256m)
 @REM RESERVED_CODE_CACHE_SIZE - Hotspot code cache size (example: 128m)
