@@ -74,7 +74,6 @@
                                 <addonId>org.jboss.forge.addon:addon-manager,${version.forge}</addonId>
                                 <addonId>org.jboss.forge.addon:maven,${version.forge}</addonId>
                                 <addonId>org.jboss.forge.addon:projects,${version.forge}</addonId>
-                                <addonId>org.jboss.forge.addon:shell,${version.forge}</addonId>
                                 <addonId>org.jboss.windup.ui:windup-ui,${project.version}</addonId>
                                 <addonId>org.jboss.windup.rules.apps:windup-rules-java,${project.version}</addonId>
                                 <addonId>org.jboss.windup.rules.apps:windup-rules-java-project,${project.version}</addonId>
