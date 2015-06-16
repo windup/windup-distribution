@@ -16,38 +16,29 @@ _windup()
     fi
     
 
-    opts=$( cat $completiondatafile | cut --fields=1 --delimiter=":" | tr "\\n" " " | sed 's/ / --/g' | sed 's/ --$//' | sed 's/^/--/' )
+    opts=$( cat $completiondatafile | cut -f 1 -d ":" | tr "\\n" " " | sed 's/ / --/g' | sed 's/ --$//' | sed 's/^/--/' )
 
-    case "${prev}" in
-	--Ainput|--Aoutput)
+    if [[ $opts == *$prev* ]]
+    then
+        local prevNoPrefix=${prev:2}
+        type=$( grep "^$prevNoPrefix:" $completiondatafile | cut -f 2 -d ":" )
+        if [ $type == 'file' ]
+        then
             _filedir
             return 0
-            ;;
-        *)
-            if [[ $opts == *$prev* ]]
-            then
-                local prevNoPrefix=${prev:2}
-                type=$( grep "^$prevNoPrefix:" $completiondatafile | cut --fields=2 --delimiter=":" )
-                if [ $type == 'file' ]
-                then
-                    _filedir
-                    return 0
-                elif [ $type == 'list' ]
-                then
-                    local listOptions=$( grep "^$prevNoPrefix:" $completiondatafile | cut --fields=3 --delimiter=":" )
-                    COMPREPLY=( $(compgen -W "${listOptions}" -- ${cur}) )
-                    return 0
-                else
-                    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
-                    return 0
-                fi
-            else
-                COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
-                return 0
-            fi
-            ;;
-
-    esac
+        elif [ $type == 'list' ]
+        then
+            local listOptions=$( grep "^$prevNoPrefix:" $completiondatafile | cut -f 3 -d ":" )
+            COMPREPLY=( $(compgen -W "${listOptions}" -- ${cur}) )
+            return 0
+        else
+            COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+            return 0
+        fi
+    else
+        COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+        return 0
+    fi
 }
 
 complete -F _windup windup
