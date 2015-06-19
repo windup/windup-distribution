@@ -22,7 +22,7 @@
 
     <properties>
         <version.nexus.index>3</version.nexus.index>
-        <version.windup>${project.version}</version.windup>
+        <version.windup>2.3.0.Final</version.windup>
         <version.forge>2.15.2.Final</version.forge>
 
         <windup.scm.connection>scm:git:https://github.com/windup/windup-distribution.git</windup.scm.connection>
