@@ -21,7 +21,7 @@
 
     <properties>
         <version.nexus.index>3</version.nexus.index>
-        <version.windup>2.3.0.Final</version.windup>
+        <version.windup>${project.version}</version.windup>
         <version.forge>2.16.2.Final</version.forge>
         <version.furnace>2.18.2.Final</version.furnace>
 
