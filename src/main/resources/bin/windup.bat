@@ -34,6 +34,10 @@ set "USERHOME=%HOMEDRIVE%%HOMEPATH%"
 
 :OkUserhome
 
+@REM Remove extraneous quotes from variables
+if not "%WINDUP_HOME%" == "" set WINDUP_HOME=%WINDUP_HOME:"=%
+if not "%JAVA_HOME%" == "" set JAVA_HOME=%JAVA_HOME:"=%
+
 @REM Execute a user defined script before this one
 if exist "%USERHOME%\winduprc_pre.bat" call "%USERHOME%\winduprc_pre.bat"
 
@@ -44,6 +48,13 @@ if "%OS%"=="Windows_NT" @setlocal
 if "%OS%"=="WINNT" @setlocal
 
 @REM ==== START VALIDATION ====
+if not "%JAVA_HOME%" == "" goto OkJHome
+
+@REM Try to infer the JAVA_HOME location from the registry
+FOR /F "skip=2 tokens=2*" %%A IN ('REG QUERY "HKLM\Software\JavaSoft\Java Runtime Environment" /v CurrentVersion') DO set CurVer=%%B
+
+FOR /F "skip=2 tokens=2*" %%A IN ('REG QUERY "HKLM\Software\JavaSoft\Java Runtime Environment\%CurVer%" /v JavaHome') DO set JAVA_HOME=%%B
+
 if not "%JAVA_HOME%" == "" goto OkJHome
 
 echo.
@@ -82,6 +93,12 @@ echo.
 goto error
 
 :chkFHome
+
+if "%OS%"=="Windows_NT" SET "SCRIPT_HOME=%~dp0.."
+if "%OS%"=="WINNT" SET "SCRIPT_HOME=%~dp0.."
+
+if exist "%SCRIPT_HOME%\windup-version.txt" set "WINDUP_HOME=%SCRIPT_HOME%"
+
 if not "%WINDUP_HOME%"=="" goto valFHome
 
 if "%OS%"=="Windows_NT" SET "WINDUP_HOME=%~dp0.."
@@ -152,6 +169,9 @@ goto runWindup
 
 @REM Start Windup
 :runWindup
+
+echo Using Windup at %WINDUP_HOME%
+echo Using Java at %JAVA_HOME%
 
 if exist "%WINDUP_HOME%\addons" set ADDONS_DIR=--immutableAddonDir "%WINDUP_HOME%\addons"
 set WINDUP_MAIN_CLASS=org.jboss.windup.bootstrap.Bootstrap

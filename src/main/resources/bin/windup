@@ -28,6 +28,29 @@ ADDONS_DIR=""
 WINDUP_DEBUG_ARGS=""
 QUOTED_ARGS=""
 
+## resolve links - $0 may be a link to Windup's home
+SCRIPT_HOME="$0"
+
+# need this for relative symlinks
+while [ -h "$PRG" ] ; do
+  ls=`ls -ld "$PRG"`
+  link=`expr "$ls" : '.*-> \(.*\)$'`
+  if expr "$link" : '/.*' > /dev/null; then
+    PRG="$link"
+  else
+    PRG="`dirname "$PRG"`/$link"
+  fi
+done
+
+saveddir=`pwd`
+
+SCRIPT_HOME=`dirname "$SCRIPT_HOME"`/..
+
+# make it fully qualified
+SCRIPT_HOME=`cd "$SCRIPT_HOME" && pwd`
+
+cd "$saveddir"
+
 while [ "$1" != "" ] ; do
 
   if [ "$1" = "--debug" ] ; then
@@ -70,6 +93,17 @@ if [ -z "$JAVA_HOME" ] ; then
   fi
 fi
 
+if [ -n "$WINDUP_HOME" ] ; then
+    # Detect if this script is in a WINDUP directory
+    if [ ! -f $SCRIPT_HOME/windup-version.txt ] ; then
+        # If it is, then use it as WINDUP_HOME
+        echo "Resetting WINDUP_HOME to $SCRIPT_HOME (from: $WINDUP_HOME)"
+
+        # Set it to blank and we will recalculate it later on
+        WINDUP_HOME=$SCRIPT_HOME
+    fi
+fi
+
 if [ -z "$WINDUP_HOME" ] ; then
   ## resolve links - $0 may be a link to Windup's home
   PRG="$0"
@@ -93,8 +127,9 @@ if [ -z "$WINDUP_HOME" ] ; then
   WINDUP_HOME=`cd "$WINDUP_HOME" && pwd`
 
   cd "$saveddir"
-  echo Using Windup at $WINDUP_HOME
 fi
+
+echo Using Windup at $WINDUP_HOME
 
 # For Cygwin, ensure paths are in UNIX format before anything is touched
 if $cygwin ; then
@@ -185,4 +220,3 @@ windup_exec_cmd="\"$JAVACMD\" $WINDUP_DEBUG_ARGS $WINDUP_OPTS \"-Dforge.standalo
    -cp \"${WINDUP_HOME}/lib/*\" $WINDUP_MAIN_CLASS"
 
 eval $windup_exec_cmd "$QUOTED_ARGS" "$ADDONS_DIR"
-
