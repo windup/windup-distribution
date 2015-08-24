@@ -9,7 +9,7 @@ This projects contains dependencies on the following projects, which must be bui
 * https://github.com/windup/windup-rulesets[windup-rulesets]: This project contains the Windup rules.
 * https://github.com/windup/windup[windup]: This project contains the Windup core source code.
 
-More detailed instructions are located here: https://github.com/windup/windup/wiki/Dev-Build-Windup-from-Source[Build Windup from Source].
+More detailed instructions are located here: https://github.com/windup/windup/wiki/Dev-Build-from-Source[Build Windup from Source].
 
 == Build the Project
 
