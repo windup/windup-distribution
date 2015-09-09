@@ -143,6 +143,34 @@
                 </plugins>
             </build>
         </profile>
+
+        <!-- Adds the Rexster addon to the build, for debug purposes. -->
+        <profile>
+            <id>add-rexster</id>
+            <activation>
+                <property>
+                    <name>rexster</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jboss.forge.furnace</groupId>
+                        <artifactId>furnace-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>deploy-addons</id>
+                                <configuration>
+                                    <addonIds combine.children="append">
+                                        <addonId>org.jboss.windup.rexster:windup-rexster,${project.version}</addonId>
+                                    </addonIds>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 
     <scm>
