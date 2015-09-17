@@ -5,5 +5,5 @@
 |__/|__/_/_/ /_/\__,_/\__,_/ .___/ 
                           /_/      
 
-Windup 2.0 is a tool used to simplify Java application migrations.
+Windup ${project.version} is a tool used to simplify Java application migrations.
 
