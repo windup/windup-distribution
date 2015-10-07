@@ -6,3 +6,4 @@ oracle
 com.oracle
 sap
 com.sap
+com.adobe
