@@ -38,6 +38,20 @@
                 <include>**</include>
             </includes>
         </fileSet>
+        <fileSet>
+            <directory>${project.build.directory}/cache</directory>
+            <outputDirectory>/cache</outputDirectory>
+            <includes>
+                <include>**</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.build.directory}/rules</directory>
+            <outputDirectory>/rules/migration-core</outputDirectory>
+            <includes>
+                <include>**</include>
+            </includes>
+        </fileSet>
     </fileSets>
 
     <dependencySets>
@@ -55,15 +69,6 @@
             <unpack>true</unpack>
             <includes>
                 <include>org.jboss.windup.maven:nexus-indexer-data:zip:*</include>
-            </includes>
-        </dependencySet>
-
-        <dependencySet>
-            <outputDirectory>/rules/migration-core</outputDirectory>
-            <useProjectArtifact>false</useProjectArtifact>
-            <unpack>true</unpack>
-            <includes>
-                <include>org.jboss.windup.rules:windup-rulesets:jar:*</include>
             </includes>
         </dependencySet>
     </dependencySets>

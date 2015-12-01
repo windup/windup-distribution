@@ -88,6 +88,62 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.10</version>
+                <executions>
+                    <execution>
+                        <id>unpack</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.jboss.windup.rules</groupId>
+                                    <artifactId>windup-rulesets</artifactId>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>${project.build.directory}/rules</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
+                            <excludes>**/tests/**</excludes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2</version>
+                <executions>
+                    <execution>
+                        <id>build-dump</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>org.jboss.windup.bootstrap.Bootstrap</mainClass>
+                    <arguments>
+                        <argument>-a</argument>
+                        <argument>${project.build.directory}/addons</argument>
+                        <argument>--batchMode</argument>
+                        <argument>--generateCaches</argument>
+                        <argument>--userRulesDirectory</argument>
+                        <argument>${project.build.directory}/rules</argument>
+                    </arguments>
+                    <systemProperties>
+                        <systemProperty>
+                            <key>windup.home</key>
+                            <value>target/</value>
+                        </systemProperty>
+                    </systemProperties>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>2.5.5</version>
                 <executions>
