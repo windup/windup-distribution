@@ -95,12 +95,12 @@ fi
 
 if [ -n "$WINDUP_HOME" ] ; then
     # Detect if this script is in a WINDUP directory
-    if [ ! -f $SCRIPT_HOME/windup-version.txt ] ; then
+    if [ ! -f "$SCRIPT_HOME/windup-version.txt" ] ; then
         # If it is, then use it as WINDUP_HOME
         echo "Resetting WINDUP_HOME to $SCRIPT_HOME (from: $WINDUP_HOME)"
 
         # Set it to blank and we will recalculate it later on
-        WINDUP_HOME=$SCRIPT_HOME
+        WINDUP_HOME="$SCRIPT_HOME"
     fi
 fi
 
@@ -197,7 +197,7 @@ fi
 
 #
 if [ -r "$WINDUP_HOME/addons/" ] ; then
-  ADDONS_DIR="--immutableAddonDir $WINDUP_HOME/addons/"
+  ADDONS_DIR="--immutableAddonDir \"$WINDUP_HOME/addons/\""
 fi
 
 if [ -z "$MAX_PERM_SIZE" ] ; then
