@@ -85,6 +85,9 @@ for /f "delims=. tokens=1-3" %%v in ("%JAVAVER%") do (
    set JAVAVER_MINOR=%%w
 )
 
+if %JAVAVER_MINOR% equ 7 set MAX_MEMORY_OPTION="-XX:MaxPermSize"
+if %JAVAVER_MINOR% geq 8 set MAX_MEMORY_OPTION="-XX:MaxMetaspaceSize"
+
 if %JAVAVER_MINOR% geq 7 goto chkFHome
 
 echo.
@@ -193,9 +196,9 @@ if "%RESERVED_CODE_CACHE_SIZE%" == "" (
 
 if "%WINDUP_OPTS%" == "" (
   if "%MAX_MEMORY%" == "" (
-    set WINDUP_OPTS_INTERNAL=-XX:MaxPermSize=%WINDUP_MAX_PERM_SIZE% -XX:ReservedCodeCacheSize=128m
+    set WINDUP_OPTS_INTERNAL=%MAX_MEMORY_OPTION%=%WINDUP_MAX_PERM_SIZE% -XX:ReservedCodeCacheSize=128m
   ) else (
-    set WINDUP_OPTS_INTERNAL=-Xmx%MAX_MEMORY% -XX:MaxPermSize=%WINDUP_MAX_PERM_SIZE% -XX:ReservedCodeCacheSize=128m
+    set WINDUP_OPTS_INTERNAL=-Xmx%MAX_MEMORY% %MAX_MEMORY_OPTION%=%WINDUP_MAX_PERM_SIZE% -XX:ReservedCodeCacheSize=128m
   )
 ) else (
   set WINDUP_OPTS_INTERNAL=%WINDUP_OPTS%
