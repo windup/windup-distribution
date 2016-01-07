@@ -171,7 +171,8 @@ fi
 
 JAVAVER=`"$JAVACMD" -version 2>&1`
 case $JAVAVER in
-*1.[7-9]*) ;;
+*1.[7]*) MAX_PERM_OPTION="-XX:MaxPermSize" ;;
+*1.[8-9]*) MAX_PERM_OPTION="-XX:MaxMetaspaceSize" ;;
 *1.[1-6]*)
 	echo " Error: a Java 1.7 or higher JRE is required to run Windup; found [$JAVACMD -version == $JAVAVER]."
 	exit 1
@@ -210,9 +211,9 @@ fi
 
 if [ -z "$WINDUP_OPTS" ] ; then
   if [ -n "$MAX_MEMORY" ] ; then
-    WINDUP_OPTS="-Xmx$MAX_MEMORY -XX:MaxPermSize=$MAX_PERM_SIZE -XX:ReservedCodeCacheSize=$RESERVED_CODE_CACHE_SIZE"
+    WINDUP_OPTS="-Xmx$MAX_MEMORY $MAX_PERM_OPTION=$MAX_PERM_SIZE -XX:ReservedCodeCacheSize=$RESERVED_CODE_CACHE_SIZE"
   else
-    WINDUP_OPTS="-XX:MaxPermSize=$MAX_PERM_SIZE -XX:ReservedCodeCacheSize=$RESERVED_CODE_CACHE_SIZE"
+    WINDUP_OPTS="$MAX_PERM_OPTION=$MAX_PERM_SIZE -XX:ReservedCodeCacheSize=$RESERVED_CODE_CACHE_SIZE"
   fi
 fi
 
