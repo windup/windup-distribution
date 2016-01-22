@@ -29,29 +29,37 @@
         <windup.developer.connection>scm:git:git@github.com:windup/windup-distribution.git</windup.developer.connection>
         <windup.scm.url>http://github.com/windup/windup-distribution</windup.scm.url>
     </properties>
+    
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+               <groupId>org.jboss.windup</groupId>
+               <artifactId>windup-bom</artifactId>
+               <version>${version.windup}</version>
+               <type>pom</type>
+               <scope>import</scope>
+           </dependency>   
+           <dependency>
+                <groupId>org.jboss.windup.rules</groupId>
+                <artifactId>windup-rulesets</artifactId>
+                <version>${version.windup}</version>
+            </dependency>     
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
             <groupId>org.jboss.windup</groupId>
             <artifactId>windup-bootstrap</artifactId>
-            <version>${version.windup}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.windup</groupId>
-            <artifactId>windup-bom</artifactId>
-            <version>${version.windup}</version>
-            <type>pom</type>
         </dependency>
         <dependency>
             <groupId>org.jboss.windup.maven</groupId>
             <artifactId>nexus-indexer-data</artifactId>
-            <version>${version.nexus.index}</version>
             <type>zip</type>
         </dependency>
         <dependency>
             <groupId>org.jboss.windup.rules</groupId>
             <artifactId>windup-rulesets</artifactId>
-            <version>${version.windup}</version>
         </dependency>
     </dependencies>
 
