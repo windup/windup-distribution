@@ -21,7 +21,7 @@
 
     <properties>
         <version.nexus.index>5</version.nexus.index>
-        <version.windup>2.5.0-SNAPSHOT</version.windup>
+        <version.windup>2.5.0.CR3</version.windup>
         <version.forge>2.20.1.Final</version.forge>
         <version.furnace>2.22.7.Final</version.furnace>
 
