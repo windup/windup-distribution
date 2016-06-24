@@ -48,7 +48,7 @@ Run Windup
         
 Get more resources
 ---------------------
-    User Guide is available at https://github.com/windup/windup/wiki/User-Guide
+    User Guide is available at https://access.redhat.com/documentation/en/red-hat-jboss-migration-toolkit
     Windup Wiki - https://github.com/windup/windup/wiki 
     Windup Forum for users - https://community.jboss.org/en/windup
     Windup JIRA issue trackers
