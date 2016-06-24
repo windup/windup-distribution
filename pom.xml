@@ -9,7 +9,7 @@
     <parent>
         <groupId>org.jboss</groupId>
         <artifactId>jboss-parent</artifactId>
-        <version>19</version>
+        <version>20</version>
     </parent>
 
     <groupId>org.jboss.windup</groupId>
@@ -22,8 +22,8 @@
     <properties>
         <version.nexus.index>5</version.nexus.index>
         <version.windup>3.0.0-SNAPSHOT</version.windup>
-        <version.forge>2.20.1.Final</version.forge>
-        <version.furnace>2.22.7.Final</version.furnace>
+        <version.forge>3.2.2.Final</version.forge>
+        <version.furnace>2.23.5.Final</version.furnace>
 
         <windup.scm.connection>scm:git:https://github.com/windup/windup-distribution.git</windup.scm.connection>
         <windup.developer.connection>scm:git:git@github.com:windup/windup-distribution.git</windup.developer.connection>
