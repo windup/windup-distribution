@@ -78,6 +78,8 @@ case "`uname`" in
   CYGWIN*) cygwin=true ;;
   MINGW*) mingw=true;;
   Darwin*) darwin=true
+           ## Prevent "Too many open files" on Mac.
+           FILE_DESCRIPTOR_OPTS="-XX:-MaxFDLimit";
            if [ -z "$JAVA_VERSION" ] ; then
              JAVA_VERSION="1.7+"
            fi
@@ -216,6 +218,8 @@ if [ -z "$WINDUP_OPTS" ] ; then
     WINDUP_OPTS="$MAX_PERM_OPTION=$MAX_PERM_SIZE -XX:ReservedCodeCacheSize=$RESERVED_CODE_CACHE_SIZE"
   fi
 fi
+
+WINDUP_OPTS="$WINDUP_OPTS $FILE_DESCRIPTOR_OPTS";
 
 windup_exec_cmd="\"$JAVACMD\" $WINDUP_DEBUG_ARGS $WINDUP_OPTS \"-Dforge.standalone=true\" \"-Dforge.home=${WINDUP_HOME}\" \"-Dwindup.home=${WINDUP_HOME}\" \
    -cp \"${WINDUP_HOME}/lib/*\" $WINDUP_MAIN_CLASS"
