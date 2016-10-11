@@ -22,8 +22,8 @@
     <properties>
         <version.nexus.index>5</version.nexus.index>
         <version.windup>3.0.0-SNAPSHOT</version.windup>
-        <version.forge>3.2.2.Final</version.forge>
-        <version.furnace>2.23.5.Final</version.furnace>
+        <version.forge>3.3.2.Final</version.forge>
+        <version.furnace>2.24.1.Final</version.furnace>
 
         <windup.scm.connection>scm:git:https://github.com/windup/windup-distribution.git</windup.scm.connection>
         <windup.developer.connection>scm:git:git@github.com:windup/windup-distribution.git</windup.developer.connection>
@@ -80,6 +80,8 @@
                         <configuration>
                             <addonRepository>${project.build.directory}/addons</addonRepository>
                             <addonIds>
+                                <addonId>org.jboss.forge.furnace.container:cdi,${version.furnace}</addonId>
+                                <addonId>org.jboss.forge.furnace.container:simple,${version.furnace}</addonId>
                                 <addonId>org.jboss.forge.addon:addon-manager,${version.forge}</addonId>
                                 <addonId>org.jboss.forge.addon:maven,${version.forge}</addonId>
                                 <addonId>org.jboss.forge.addon:projects,${version.forge}</addonId>
