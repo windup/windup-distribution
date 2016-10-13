@@ -56,10 +56,17 @@
             <groupId>org.jboss.windup.maven</groupId>
             <artifactId>nexus-indexer-data</artifactId>
             <type>zip</type>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.jboss.windup.maven</groupId>
+                    <artifactId>nexus-indexer</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.jboss.windup.rules</groupId>
             <artifactId>windup-rulesets</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -82,10 +89,6 @@
                             <addonIds>
                                 <addonId>org.jboss.forge.furnace.container:cdi,${version.furnace}</addonId>
                                 <addonId>org.jboss.forge.furnace.container:simple,${version.furnace}</addonId>
-                                <addonId>org.jboss.forge.addon:addon-manager,${version.forge}</addonId>
-                                <addonId>org.jboss.forge.addon:maven,${version.forge}</addonId>
-                                <addonId>org.jboss.forge.addon:projects,${version.forge}</addonId>
-                                <addonId>org.jboss.windup.ui:windup-ui,${project.version}</addonId>
                                 <addonId>org.jboss.windup.rules.apps:windup-rules-java,${project.version}</addonId>
                                 <addonId>org.jboss.windup.rules.apps:windup-rules-java-project,${project.version}</addonId>
                                 <addonId>org.jboss.windup.rules.apps:windup-rules-java-ee,${project.version}</addonId>
