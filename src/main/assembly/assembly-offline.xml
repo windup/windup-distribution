@@ -12,7 +12,6 @@
     <fileSets>
         <fileSet>
             <directory>src/main/resources</directory>
-            <outputDirectory>/</outputDirectory>
             <filtered>true</filtered>
             <includes>
                <include>/windup-version.txt</include>
@@ -21,7 +20,6 @@
         </fileSet>
         <fileSet>
             <directory>src/main/resources</directory>
-            <outputDirectory>/</outputDirectory>
             <filtered>false</filtered>
             <includes>
                 <include>**</include>
@@ -33,21 +31,21 @@
         </fileSet>
         <fileSet>
             <directory>${project.build.directory}/addons</directory>
-            <outputDirectory>/addons</outputDirectory>
+            <outputDirectory>addons</outputDirectory>
             <includes>
                 <include>**</include>
             </includes>
         </fileSet>
         <fileSet>
             <directory>${project.build.directory}/cache</directory>
-            <outputDirectory>/cache</outputDirectory>
+            <outputDirectory>cache</outputDirectory>
             <includes>
                 <include>**</include>
             </includes>
         </fileSet>
         <fileSet>
             <directory>${project.build.directory}/rules</directory>
-            <outputDirectory>/rules/migration-core</outputDirectory>
+            <outputDirectory>rules/migration-core</outputDirectory>
             <includes>
                 <include>**</include>
             </includes>
@@ -56,7 +54,7 @@
 
     <dependencySets>
         <dependencySet>
-            <outputDirectory>/lib</outputDirectory>
+            <outputDirectory>lib</outputDirectory>
             <useProjectArtifact>false</useProjectArtifact>
             <excludes>
                 <exclude>org.jboss.windup.maven:nexus-indexer-data:zip:*</exclude>
@@ -64,7 +62,7 @@
         </dependencySet>
 
         <dependencySet>
-            <outputDirectory>/cache/nexus-indexer-data/</outputDirectory>
+            <outputDirectory>cache/nexus-indexer-data/</outputDirectory>
             <useProjectArtifact>false</useProjectArtifact>
             <unpack>true</unpack>
             <includes>
