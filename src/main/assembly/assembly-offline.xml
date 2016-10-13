@@ -12,6 +12,7 @@
     <fileSets>
         <fileSet>
             <directory>src/main/resources</directory>
+            <outputDirectory/>
             <filtered>true</filtered>
             <includes>
                <include>/windup-version.txt</include>
@@ -20,6 +21,7 @@
         </fileSet>
         <fileSet>
             <directory>src/main/resources</directory>
+            <outputDirectory/>
             <filtered>false</filtered>
             <includes>
                 <include>**</include>
