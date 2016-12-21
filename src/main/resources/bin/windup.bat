@@ -17,7 +17,7 @@
 @REM WINDUP_HOME - location of Windup's installed home dir
 @REM WINDUP_OPTS - parameters passed to the Java VM when running Windup
 @REM MAX_MEMORY - Maximum Java Heap (example: 2048m)
-@REM MAX_PERM_SIZE - Maximum Permgen size (example: 256m)
+@REM MAX_METASPACE_SIZE - Maximum Metaspace size (example: 256m)
 @REM RESERVED_CODE_CACHE_SIZE - Hotspot code cache size (example: 128m)
 @REM ----------------------------------------------------------------------------
 
@@ -85,13 +85,10 @@ for /f "delims=. tokens=1-3" %%v in ("%JAVAVER%") do (
    set JAVAVER_MINOR=%%w
 )
 
-if %JAVAVER_MINOR% equ 7 set MAX_MEMORY_OPTION="-XX:MaxPermSize"
-if %JAVAVER_MINOR% geq 8 set MAX_MEMORY_OPTION="-XX:MaxMetaspaceSize"
-
-if %JAVAVER_MINOR% geq 7 goto chkFHome
+if %JAVAVER_MINOR% geq 8 goto chkFHome
 
 echo.
-echo A Java 1.7 or higher JRE is required to run Windup. "%JAVA_HOME%\bin\java.exe" is version %JAVAVER%
+echo A Java 1.8 or higher JRE is required to run Windup. "%JAVA_HOME%\bin\java.exe" is version %JAVAVER%
 echo.
 goto error
 
@@ -180,12 +177,12 @@ if exist "%WINDUP_HOME%\addons" set ADDONS_DIR=--immutableAddonDir "%WINDUP_HOME
 set WINDUP_MAIN_CLASS=org.jboss.windup.bootstrap.Bootstrap
 
 @REM MAX_MEMORY - Maximum Java Heap (example: 2048m)
-@REM MAX_PERM_SIZE - Maximum Permgen size (example: 256m)
+@REM MAX_METASPACE_SIZE - Maximum Metaspace size (example: 256m)
 @REM RESERVED_CODE_CACHE_SIZE - Hotspot code cache size (example: 128m)
-if "%MAX_PERM_SIZE%" == "" (
-  set WINDUP_MAX_PERM_SIZE=256m
+if "%MAX_METASPACE_SIZE%" == "" (
+  set WINDUP_MAX_METASPACE_SIZE=256m
 ) else (
-  set WINDUP_MAX_PERM_SIZE=%MAX_PERM_SIZE%
+  set WINDUP_MAX_METASPACE_SIZE=%MAX_METASPACE_SIZE%
 )
 
 if "%RESERVED_CODE_CACHE_SIZE%" == "" (
@@ -196,9 +193,9 @@ if "%RESERVED_CODE_CACHE_SIZE%" == "" (
 
 if "%WINDUP_OPTS%" == "" (
   if "%MAX_MEMORY%" == "" (
-    set WINDUP_OPTS_INTERNAL=%MAX_MEMORY_OPTION%=%WINDUP_MAX_PERM_SIZE% -XX:ReservedCodeCacheSize=128m
+    set WINDUP_OPTS_INTERNAL=-XX:MaxMetaspaceSize=%WINDUP_MAX_METASPACE_SIZE% -XX:ReservedCodeCacheSize=128m
   ) else (
-    set WINDUP_OPTS_INTERNAL=-Xmx%MAX_MEMORY% %MAX_MEMORY_OPTION%=%WINDUP_MAX_PERM_SIZE% -XX:ReservedCodeCacheSize=128m
+    set WINDUP_OPTS_INTERNAL=-Xmx%MAX_MEMORY% -XX:MaxMetaspaceSize=%WINDUP_MAX_METASPACE_SIZE% -XX:ReservedCodeCacheSize=128m
   )
 ) else (
   set WINDUP_OPTS_INTERNAL=%WINDUP_OPTS%
@@ -224,7 +221,7 @@ if "%OS%"=="WINNT" goto endNT
 set WINDUP_JAVA_EXE=
 set WINDUP_CMD_LINE_ARGS=
 set WINDUP_OPTS_INTERNAL=
-set WINDUP_MAX_PERM_SIZE=
+set WINDUP_MAX_METASPACE_SIZE=
 set WINDUP_RESERVED_CODE_CACHE_SIZE=
 goto postExec
 
