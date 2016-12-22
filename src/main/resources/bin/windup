@@ -21,7 +21,7 @@
 #   WINDUP_HOME - location of Windup's installed home dir
 #   WINDUP_OPTS - parameters passed to the Java VM when running Windup
 #   MAX_MEMORY - Maximum Java Heap (example: 2048m)
-#   MAX_PERM_SIZE - Maximum Permgen size (example: 256m)
+#   MAX_METASPACE_SIZE - Maximum Metaspace size (example: 256m)
 #   RESERVED_CODE_CACHE_SIZE - Hotspot code cache size (example: 128m)
 # -----------------------------------------------------------------------
 ADDONS_DIR=()
@@ -172,10 +172,9 @@ fi
 
 JAVAVER=`"$JAVACMD" -version 2>&1`
 case $JAVAVER in
-*1.[7]*) MAX_PERM_OPTION="-XX:MaxPermSize" ;;
-*1.[8-9]*) MAX_PERM_OPTION="-XX:MaxMetaspaceSize" ;;
-*1.[1-6]*)
-	echo " Error: a Java 1.7 or higher JRE is required to run Windup; found [$JAVACMD -version == $JAVAVER]."
+*1.[8-9]*) ;;
+*1.[1-7]*)
+	echo " Error: a Java 1.8 or higher JRE is required to run Windup; found [$JAVACMD -version == $JAVAVER]."
 	exit 1
  ;;
 esac
@@ -202,8 +201,8 @@ if [ -r "$WINDUP_HOME/addons/" ] ; then
   ADDONS_DIR=("--immutableAddonDir" "$WINDUP_HOME/addons/")
 fi
 
-if [ -z "$MAX_PERM_SIZE" ] ; then
-  MAX_PERM_SIZE="256m"
+if [ -z "$MAX_METASPACE_SIZE" ] ; then
+  MAX_METASPACE_SIZE="256m"
 fi
 
 if [ -z "$RESERVED_CODE_CACHE_SIZE" ] ; then
@@ -212,9 +211,9 @@ fi
 
 if [ -z "$WINDUP_OPTS" ] ; then
   if [ -n "$MAX_MEMORY" ] ; then
-    WINDUP_OPTS="-Xmx$MAX_MEMORY $MAX_PERM_OPTION=$MAX_PERM_SIZE -XX:ReservedCodeCacheSize=$RESERVED_CODE_CACHE_SIZE"
+    WINDUP_OPTS="-Xmx$MAX_MEMORY -XX:MaxMetaspaceSize=$MAX_METASPACE_SIZE -XX:ReservedCodeCacheSize=$RESERVED_CODE_CACHE_SIZE"
   else
-    WINDUP_OPTS="$MAX_PERM_OPTION=$MAX_PERM_SIZE -XX:ReservedCodeCacheSize=$RESERVED_CODE_CACHE_SIZE"
+    WINDUP_OPTS="-XX:MaxMetaspaceSize=$MAX_METASPACE_SIZE -XX:ReservedCodeCacheSize=$RESERVED_CODE_CACHE_SIZE"
   fi
 fi
 
