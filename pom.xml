@@ -13,10 +13,10 @@
     </parent>
 
     <groupId>org.jboss.windup</groupId>
-    <artifactId>windup-distribution</artifactId>
+    <artifactId>rhamt-distribution</artifactId>
     <version>3.1.0-SNAPSHOT</version>
 
-    <name>Windup - Distribution Build</name>
+    <name>RHAMT - Distribution Build</name>
     <packaging>pom</packaging>
 
     <properties>
@@ -38,12 +38,12 @@
                <version>${version.windup}</version>
                <type>pom</type>
                <scope>import</scope>
-           </dependency>   
+           </dependency>
            <dependency>
                 <groupId>org.jboss.windup.rules</groupId>
                 <artifactId>windup-rulesets</artifactId>
                 <version>${version.windup}</version>
-            </dependency>     
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -198,10 +198,10 @@
                                 <phase>package</phase>
                                 <configuration>
                                     <licensesOutputDirectory>
-                                        ${project.build.directory}/windup-distribution-${project.version}/docs/licenses
+                                        ${project.build.directory}/rhamt-distribution-${project.version}/docs/licenses
                                     </licensesOutputDirectory>
                                     <licensesOutputFile>
-                                        ${project.build.directory}/windup-distribution-${project.version}/docs/licenses/licenses.xml
+                                        ${project.build.directory}/rhamt-distribution-${project.version}/docs/licenses/licenses.xml
                                     </licensesOutputFile>
                                 </configuration>
                             </execution>

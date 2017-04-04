@@ -1,6 +1,6 @@
-# bash completion for windup                               -*- shell-script -*-
+# bash completion for rhamt-cli                               -*- shell-script -*-
 
-_windup()
+_rhamt-cli()
 {
     local cur prev opts type
     local cmd="${1}"
@@ -41,6 +41,6 @@ _windup()
     fi
 }
 
-complete -F _windup windup
+complete -F _rhamt-cli rhamt-cli
 
 # ex: ts=4 sw=4 et filetype=sh
