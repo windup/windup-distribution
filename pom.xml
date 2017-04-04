@@ -13,7 +13,7 @@
     </parent>
 
     <groupId>org.jboss.windup</groupId>
-    <artifactId>rhamt-distribution</artifactId>
+    <artifactId>rhamt-cli</artifactId>
     <version>3.1.0-SNAPSHOT</version>
 
     <name>RHAMT - Distribution Build</name>

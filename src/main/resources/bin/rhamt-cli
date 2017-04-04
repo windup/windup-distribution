@@ -61,12 +61,12 @@ while [ "$1" != "" ] ; do
   shift
 done
 
-if [ -f /etc/winduprc ] ; then
-  . /etc/winduprc
+if [ -f /etc/rhamtrc ] ; then
+  . /etc/rhamtrc
 fi
 
-if [ -f "$HOME/.winduprc" ] ; then
-  . "$HOME/.winduprc"
+if [ -f "$HOME/.rhamtrc" ] ; then
+  . "$HOME/.rhamtrc"
 fi
 
 # OS specific support.  $var _must_ be set to either true or false.

@@ -49,11 +49,11 @@ Run RHAMT
 Get more resources
 ---------------------
     User Guide is available at https://access.redhat.com/documentation/en/red-hat-jboss-migration-toolkit
-    Windup Wiki - https://github.com/windup/windup/wiki 
-    Windup Forum for users - https://community.jboss.org/en/windup
-    Windup JIRA issue trackers
-        Windup core: https://issues.jboss.org/browse/WINDUP
-        Windup Rules: https://issues.jboss.org/browse/WINDUPRULE
-    Windup users mailing List: windup-users@lists.jboss.org
-    Windup on Twitter: @JBossWindup (https://twitter.com/jbosswindup)
-    Windup IRC channel: Server FreeNode (irc.freenode.net), channel #windup
+    RHAMT Wiki - https://github.com/windup/windup/wiki 
+    RHAMT Forum for users - https://community.jboss.org/en/windup
+    RHAMT JIRA issue trackers
+        RHAMT core: https://issues.jboss.org/browse/WINDUP
+        RHAMT Rules: https://issues.jboss.org/browse/WINDUPRULE
+    RHAMT users mailing List: windup-users@lists.jboss.org
+    RHAMT on Twitter: @JBossWindup (https://twitter.com/jbosswindup)
+    RHAMT IRC channel: Server FreeNode (irc.freenode.net), channel #windup

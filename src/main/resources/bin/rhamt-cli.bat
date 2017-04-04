@@ -39,7 +39,7 @@ if not "%RHAMT_HOME%" == "" set RHAMT_HOME=%RHAMT_HOME:"=%
 if not "%JAVA_HOME%" == "" set JAVA_HOME=%JAVA_HOME:"=%
 
 @REM Execute a user defined script before this one
-if exist "%USERHOME%\winduprc_pre.bat" call "%USERHOME%\winduprc_pre.bat"
+if exist "%USERHOME%\rhamtrc_pre.bat" call "%USERHOME%\rhamtrc_pre.bat"
 
 set ERROR_CODE=0
 
@@ -229,7 +229,7 @@ goto postExec
 @endlocal & set ERROR_CODE=%ERROR_CODE%
 
 :postExec
-if exist "%USERHOME%\winduprc_post.bat" call "%USERHOME%\winduprc_post.bat"
+if exist "%USERHOME%\rhamtrc_post.bat" call "%USERHOME%\rhamtrc_post.bat"
 
 if "%RHAMT_TERMINATE_CMD%" == "on" exit %ERROR_CODE%
 
