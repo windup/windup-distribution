@@ -224,5 +224,5 @@ exec $JAVACMD "${RHAMT_DEBUG_ARGS[@]}" \
     -Dforge.standalone=true \
     -Dforge.home=${RHAMT_HOME} \
     -Dwindup.home=${RHAMT_HOME} \
-    -Dh2.consoleTimeout=24000000 \
+    -Dh2.consoleTimeout=172800000 \
     -cp ${RHAMT_HOME}/lib/'*' $RHAMT_MAIN_CLASS "${QUOTED_ARGS[@]}" "${ADDONS_DIR[@]}"
