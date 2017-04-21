@@ -219,5 +219,10 @@ fi
 
 RHAMT_OPTS="$RHAMT_OPTS $FILE_DESCRIPTOR_OPTS";
 
-exec $JAVACMD "${RHAMT_DEBUG_ARGS[@]}" $RHAMT_OPTS -Dforge.standalone=true -Dforge.home=${RHAMT_HOME} -Dwindup.home=${RHAMT_HOME} \
-   -cp ${RHAMT_HOME}/lib/'*' $RHAMT_MAIN_CLASS "${QUOTED_ARGS[@]}" "${ADDONS_DIR[@]}"
+exec $JAVACMD "${RHAMT_DEBUG_ARGS[@]}" \
+    $RHAMT_OPTS \
+    -Dforge.standalone=true \
+    -Dforge.home=${RHAMT_HOME} \
+    -Dwindup.home=${RHAMT_HOME} \
+    -Dh2.consoleTimeout=24000000 \
+    -cp ${RHAMT_HOME}/lib/'*' $RHAMT_MAIN_CLASS "${QUOTED_ARGS[@]}" "${ADDONS_DIR[@]}"
