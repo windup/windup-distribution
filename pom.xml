@@ -29,7 +29,7 @@
         <windup.developer.connection>scm:git:git@github.com:windup/windup-distribution.git</windup.developer.connection>
         <windup.scm.url>http://github.com/windup/windup-distribution</windup.scm.url>
     </properties>
-    
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -72,6 +72,7 @@
 
     <build>
         <plugins>
+            <!-- Create the Forge addons repository. -->
             <plugin>
                 <groupId>org.jboss.forge.furnace</groupId>
                 <artifactId>furnace-maven-plugin</artifactId>
@@ -94,11 +95,13 @@
                                 <addonId>org.jboss.windup.rules.apps:windup-rules-java-ee,${project.version}</addonId>
                                 <addonId>org.jboss.windup:windup-tooling,${project.version}</addonId>
                                 <addonId>org.jboss.windup.rules.apps:windup-rules-tattletale,${project.version}</addonId>
+                                <addonId>org.jboss.windup.rules.apps:windup-rules-java-victims,${project.version}</addonId>
                             </addonIds>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
+            <!-- Unpack the core rules. -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -123,6 +126,7 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- Generate caches. -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
@@ -154,6 +158,7 @@
                     </systemProperties>
                 </configuration>
             </plugin>
+            <!-- Assemble. -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
