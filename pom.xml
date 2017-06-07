@@ -89,11 +89,11 @@
                             <addonIds>
                                 <addonId>org.jboss.forge.furnace.container:cdi,${version.furnace}</addonId>
                                 <addonId>org.jboss.forge.furnace.container:simple,${version.furnace}</addonId>
-                                <addonId>org.jboss.windup.rules.apps:windup-rules-java,${project.version}</addonId>
-                                <addonId>org.jboss.windup.rules.apps:windup-rules-java-project,${project.version}</addonId>
-                                <addonId>org.jboss.windup.rules.apps:windup-rules-java-ee,${project.version}</addonId>
-                                <addonId>org.jboss.windup:windup-tooling,${project.version}</addonId>
-                                <addonId>org.jboss.windup.rules.apps:windup-rules-tattletale,${project.version}</addonId>
+                                <addonId>org.jboss.windup.rules.apps:windup-rules-java,${version.windup}</addonId>
+                                <addonId>org.jboss.windup.rules.apps:windup-rules-java-project,${version.windup}</addonId>
+                                <addonId>org.jboss.windup.rules.apps:windup-rules-java-ee,${version.windup}</addonId>
+                                <addonId>org.jboss.windup:windup-tooling,${version.windup}</addonId>
+                                <addonId>org.jboss.windup.rules.apps:windup-rules-tattletale,${version.windup}</addonId>
                             </addonIds>
                         </configuration>
                     </execution>
@@ -229,7 +229,7 @@
                                 <id>deploy-addons</id>
                                 <configuration>
                                     <addonIds combine.children="append">
-                                        <addonId>org.jboss.windup.rexster:windup-rexster,${project.version}</addonId>
+                                        <addonId>org.jboss.windup.rexster:windup-rexster,${version.windup}</addonId>
                                     </addonIds>
                                 </configuration>
                             </execution>
