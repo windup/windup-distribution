@@ -7,3 +7,5 @@ com.oracle
 sap
 com.sap
 com.adobe
+com.sun.mail
+javax.mail
