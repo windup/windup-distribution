@@ -21,7 +21,6 @@
     <packaging>pom</packaging>
 
     <properties>
-        <version.nexus.index>5</version.nexus.index>
         <version.windup>4.0.0-SNAPSHOT</version.windup>
         <version.forge>3.6.0.Final</version.forge>
         <version.furnace>2.25.4.Final</version.furnace>
