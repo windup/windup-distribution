@@ -1,0 +1,13 @@
+com.hazelcast
+com.sun.mail
+org.elasticsearch
+org.apache.coyote
+org.apache.catalina
+org.apache.geronimo
+org.apache.jasper
+org.apache.tomcat
+org.eclipse.jetty
+org.hsqldb
+javassist
+javax.mail
+javax.servlet
