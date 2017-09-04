@@ -10,12 +10,12 @@
         <groupId>org.jboss</groupId>
         <artifactId>jboss-parent</artifactId>
         <version>22</version>
-        <relativePath/>
+        <relativePath />
     </parent>
 
     <groupId>org.jboss.windup</groupId>
     <artifactId>rhamt-cli</artifactId>
-    <version>4.0.0-SNAPSHOT</version>
+    <version>4.0.0.Beta4</version>
 
     <name>RHAMT - Distribution Build</name>
     <packaging>pom</packaging>
@@ -241,7 +241,7 @@
     </profiles>
 
     <scm>
-        <tag>${version.windup}</tag>
+        <tag>4.0.0.Beta4</tag>
         <connection>${windup.scm.connection}</connection>
         <developerConnection>${windup.developer.connection}</developerConnection>
         <url>${windup.scm.url}</url>
