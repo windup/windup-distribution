@@ -15,13 +15,13 @@
 
     <groupId>org.jboss.windup</groupId>
     <artifactId>rhamt-cli</artifactId>
-    <version>4.1.0-SNAPSHOT</version>
+    <version>4.0.1-SNAPSHOT</version>
 
     <name>RHAMT - Distribution Build</name>
     <packaging>pom</packaging>
 
     <properties>
-        <version.windup>4.1.0-SNAPSHOT</version.windup>
+        <version.windup>4.0.1-SNAPSHOT</version.windup>
         <version.forge>3.6.0.Final</version.forge>
         <version.furnace>2.25.4.Final</version.furnace>
 
