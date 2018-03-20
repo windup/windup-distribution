@@ -21,7 +21,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <version.windup>4.0.1.Final</version.windup>
+        <version.windup>4.0.2-SNAPSHOT</version.windup>
         <version.forge>3.6.0.Final</version.forge>
         <version.furnace>2.25.4.Final</version.furnace>
 
