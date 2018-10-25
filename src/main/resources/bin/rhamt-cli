@@ -194,8 +194,13 @@ if [ ! -x "$JAVACMD" ] ; then
   exit 1
 fi
 
+MODULES=""
 JAVAVER=`"$JAVACMD" -version 2>&1`
 case $JAVAVER in
+*"11"*)
+    MODULES="--add-modules=java.se"
+    echo "EXPERIMENTAL Running on JDK $JAVAVER"
+;;
 *1.[8-9]*) ;;
 *1.[1-7]*)
 	echo " Error: a Java 1.8 or higher JRE is required to run RHAMT; found [$JAVACMD -version == $JAVAVER]."
@@ -243,5 +248,5 @@ fi
 
 RHAMT_OPTS="$RHAMT_OPTS $FILE_DESCRIPTOR_OPTS";
 
-exec "$JAVACMD" "${RHAMT_DEBUG_ARGS[@]}" $RHAMT_OPTS -Dforge.standalone=true -Dforge.home="${RHAMT_HOME}" -Dwindup.home="${RHAMT_HOME}" \
+exec "$JAVACMD" $MODULES "${RHAMT_DEBUG_ARGS[@]}" $RHAMT_OPTS -Dforge.standalone=true -Dforge.home="${RHAMT_HOME}" -Dwindup.home="${RHAMT_HOME}" \
    -cp "${RHAMT_HOME}"/lib/'*' $RHAMT_MAIN_CLASS "${QUOTED_ARGS[@]}" "${ADDONS_DIR[@]}"
