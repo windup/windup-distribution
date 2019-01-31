@@ -199,7 +199,7 @@ JAVAVER=`"$JAVACMD" -version 2>&1`
 case $JAVAVER in
 *"11"*)
     MODULES="--add-modules=java.se"
-    echo "EXPERIMENTAL Running on JDK $JAVAVER"
+    echo "TECH PREVIEW Running on JDK $JAVAVER"
 ;;
 *1.[8-9]*) ;;
 *1.[1-7]*)

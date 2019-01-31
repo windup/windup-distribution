@@ -82,9 +82,16 @@ for /f "tokens=3" %%g in ('java -version 2^>^&1 ^| findstr /i "version"') do (
    set JAVAVER=%%g
 )
 for /f "delims=. tokens=1-3" %%v in ("%JAVAVER%") do (
+   set JAVAVER_MAJOR=%%v
    set JAVAVER_MINOR=%%w
 )
-
+set "JAVAVER_MAJOR=%JAVAVER_MAJOR:~1,2%"
+set MODULES=
+if %JAVAVER_MAJOR% geq 11 (
+    echo TECH PREVIEW Running on JDK %JAVAVER%
+    SET MODULES="--add-modules=java.se"
+    goto chkFHome
+)
 if %JAVAVER_MINOR% geq 8 goto chkFHome
 
 echo.
@@ -201,7 +208,7 @@ if "%RHAMT_OPTS%" == "" (
   set RHAMT_OPTS_INTERNAL=%RHAMT_OPTS%
 )
 
-%RHAMT_JAVA_EXE% %RHAMT_DEBUG_ARGS% %RHAMT_OPTS_INTERNAL% "-Dforge.standalone=true" "-Dforge.home=%RHAMT_HOME%" "-Dwindup.home=%RHAMT_HOME%" ^
+%RHAMT_JAVA_EXE% %MODULES% %RHAMT_DEBUG_ARGS% %RHAMT_OPTS_INTERNAL% "-Dforge.standalone=true" "-Dforge.home=%RHAMT_HOME%" "-Dwindup.home=%RHAMT_HOME%" ^
    -cp ".;%RHAMT_HOME%\lib\*" %RHAMT_MAIN_CLASS% %RHAMT_CMD_LINE_ARGS% %ADDONS_DIR%
 if ERRORLEVEL 1 goto error
 goto end
