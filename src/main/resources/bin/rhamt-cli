@@ -197,7 +197,7 @@ fi
 MODULES=""
 JAVAVER=`"$JAVACMD" -version 2>&1`
 case $JAVAVER in
-*"11"*)
+"11."*)
     MODULES="--add-modules=java.se"
     echo "TECH PREVIEW Running on JDK $JAVAVER"
 ;;
