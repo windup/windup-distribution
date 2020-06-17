@@ -15,7 +15,7 @@
             <outputDirectory/>
             <filtered>true</filtered>
             <includes>
-               <include>/rhamt-cli-version.txt</include>
+               <include>/mta-cli-version.txt</include>
                <include>/README.txt</include>
             </includes>
         </fileSet>
@@ -27,7 +27,7 @@
                 <include>**</include>
             </includes>
             <excludes>
-               <exclude>/rhamt-cli-version.txt</exclude>
+               <exclude>/mta-cli-version.txt</exclude>
                <exclude>/README.txt</exclude>
             </excludes>
         </fileSet>

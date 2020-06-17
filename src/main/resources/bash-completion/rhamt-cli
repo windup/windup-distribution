@@ -1,6 +1,6 @@
-# bash completion for rhamt-cli                               -*- shell-script -*-
+# bash completion for mta-cli                               -*- shell-script -*-
 
-_rhamt-cli()
+mta-cli()
 {
     local cur prev opts type
     local cmd="${1}"
@@ -41,6 +41,6 @@ _rhamt-cli()
     fi
 }
 
-complete -F _rhamt-cli rhamt-cli
+complete -F _mta-cli mta-cli
 
 # ex: ts=4 sw=4 et filetype=sh

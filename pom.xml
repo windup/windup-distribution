@@ -14,10 +14,10 @@
     </parent>
 
     <groupId>org.jboss.windup</groupId>
-    <artifactId>rhamt-cli</artifactId>
+    <artifactId>mta-cli</artifactId>
     <version>4.3.2-SNAPSHOT</version>
 
-    <name>RHAMT - Distribution Build</name>
+    <name>MTA - Distribution Build</name>
     <packaging>pom</packaging>
 
     <properties>
@@ -209,10 +209,10 @@
                                 <phase>package</phase>
                                 <configuration>
                                     <licensesOutputDirectory>
-                                        ${project.build.directory}/rhamt-distribution-${project.version}/docs/licenses
+                                        ${project.build.directory}/mta-distribution-${project.version}/docs/licenses
                                     </licensesOutputDirectory>
                                     <licensesOutputFile>
-                                        ${project.build.directory}/rhamt-distribution-${project.version}/docs/licenses/licenses.xml
+                                        ${project.build.directory}/mta-distribution-${project.version}/docs/licenses/licenses.xml
                                     </licensesOutputFile>
                                 </configuration>
                             </execution>
