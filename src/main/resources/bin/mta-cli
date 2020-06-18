@@ -30,7 +30,8 @@ QUOTED_ARGS=()
 
 ## Increase the open file limit if low, to what we need or at least to the hard limit.
 ## Complain if the hard limit is lower than what we need.
-WE_NEED=1024
+## Value set to 5000 to be aligned with windup-web-distribution
+WE_NEED=5000
 MAX_HARD=$(ulimit -H -n);
 MAX_SOFT=$(ulimit -S -n);
 
@@ -38,17 +39,20 @@ if [ $MAX_SOFT == 'unlimited' ] ; then MAX_SOFT=$WE_NEED; fi;
 if [ $MAX_HARD == 'unlimited' ] ; then MAX_HARD=$WE_NEED; fi;
 
 if [ $MAX_SOFT -lt $WE_NEED ] || [ $MAX_HARD -lt $WE_NEED ]  ; then
-
-  echo ""
-  echo "[WARNING] The limits ($MAX_SOFT/$MAX_HARD) for open files is too low and could make MTA unstable. Please increase them to at least $WE_NEED."
-  echo ""
-  echo "    {RHEL & Fedora} Limits are typically configured in /etc/security/limits.conf"
-  echo "     -> Follow instructions of https://access.redhat.com/solutions/60746"
-  echo ""
-  echo "    {MacOS} Limits are typically configured in /etc/launchd.conf or /etc/sysctl.conf."
-  echo "     -> Execute this script: https://gist.github.com/Maarc/d13b1e70f191d5b527a24d39dd3e2569 and restart your operating system."
-  echo ""
-
+  if [ $MAX_HARD -lt $WE_NEED ] ; then 
+    echo ""
+    echo "[WARNING] The limit ($MAX_HARD) for open files is too low and could make MTA unstable. Please increase them to at least $WE_NEED."
+    echo ""
+    echo "    {RHEL & Fedora} Limits are typically configured in /etc/security/limits.conf"
+    echo "     -> Follow instructions of https://access.redhat.com/solutions/60746"
+    echo ""
+    echo "    {MacOS} Limits are typically configured in /etc/launchd.conf or /etc/sysctl.conf."
+    echo "     -> Execute this script: https://gist.github.com/Maarc/d13b1e70f191d5b527a24d39dd3e2569 and restart your operating system."
+    echo ""
+  fi
+  MIN_WE_NEED_OR_CAN_HAVE=$(( $MAX_HARD > $WE_NEED ? $WE_NEED : $MAX_HARD ))
+  echo "Increasing the maximum of open files to $MIN_WE_NEED_OR_CAN_HAVE."
+  ulimit -S -n $MIN_WE_NEED_OR_CAN_HAVE
 fi
 
 
