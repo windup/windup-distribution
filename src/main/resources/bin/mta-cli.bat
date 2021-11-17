@@ -140,9 +140,12 @@ goto error
 
 @REM Initializing the argument line
 :init
-setlocal enableextensions enabledelayedexpansion
+setlocal enableextensions enableDelayedExpansion
 set MTA_CMD_LINE_ARGS=
 set MTA_DEBUG_ARGS=
+set OR_CMD_LINE_ARGS=
+set RUN_OPENREWRITE=false
+set OR_GOAL=dryRun
 
 if "%1"=="" goto initArgs
 
@@ -150,12 +153,48 @@ set "args=%*"
 set "args=%args:,=:comma:%"
 set "args=%args:;=:semicolon:%"
 
+set C=0
+
 for %%x in (%args%) do (
     set "arg=%%~x"
     set "arg=!arg::comma:=,!"
     set "arg=!arg::semicolon:=;!"
+    set "argElement[!C!]=!arg!"
+    set /A C=!C! + 1
+)
+
+set COUNT=0
+
+for %%x in (%args%) do (
+    set OR_REMOVE_ARG=false
+    set "arg=%%~x"
+    set "arg=!arg::comma:=,!"
+    set "arg=!arg::semicolon:=;!"
     if "!arg!"=="--debug" set MTA_DEBUG_ARGS=-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000
+    if "!arg!"=="--input" (
+        set "OR_REMOVE_ARG=true"
+	set /A y=!COUNT! + 1
+        call set OR_TRANSFORM_PATH=%%argElement[!y!]%%
+    )
+    if "!arg!"=="!OR_TRANSFORM_PATH!" (
+        set "OR_REMOVE_ARG=true"
+    )
+    if "!arg!"=="--openrewrite" (
+        set "OR_REMOVE_ARG=true"
+        set RUN_OPENREWRITE=true
+    )
+    if "!arg!"=="--goal" (
+        set "OR_REMOVE_ARG=true"
+	set /A z=!COUNT! + 1	
+        call set OR_GOAL=%%argElement[!z!]%%
+    )
+    if "!arg!"=="!OR_GOAL!" (
+        set "OR_REMOVE_ARG=true"
+    )
+
+    if !OR_REMOVE_ARG!==false set "OR_CMD_LINE_ARGS=!OR_CMD_LINE_ARGS! "!arg!""
     set "MTA_CMD_LINE_ARGS=!MTA_CMD_LINE_ARGS! "!arg!""
+    set /A COUNT=!COUNT! + 1
 )
 
 :initArgs
@@ -172,7 +211,15 @@ SET MTA_JAVA_EXE="%JAVA_HOME%\bin\java.exe"
 @REM -- 4NT shell
 if "%@eval[2+2]" == "4" goto 4NTCWJars
 
-goto runMTA_CLI
+if %RUN_OPENREWRITE%==false goto runMTA_CLI
+
+:runOpenrewrite
+PUSHD "%OR_TRANSFORM_PATH%"
+mvn "org.openrewrite.maven:rewrite-maven-plugin:4.13.0:%OR_GOAL%" "-Drewrite.configLocation=%MTA_HOME%\rules\openrewrite\rewrite.yml" %OR_CMD_LINE_ARGS%
+POPD
+
+if ERRORLEVEL 1 goto error
+goto end
 
 @REM Start MTA
 :runMTA_CLI
