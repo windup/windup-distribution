@@ -38,7 +38,9 @@ jobs:
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
     - name: Build on JDK 11 skipping tests
-      run: mvn -B clean install -DskipTests
+      run: 
+        mvn -B clean install -DskipTests
+      working-directory: windup
       
   # build_windup_rulesets job
   build_windup_rulesets:
