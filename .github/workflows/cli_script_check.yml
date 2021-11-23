@@ -1,21 +1,19 @@
 # Workflow to build and check cli_scripts in Linux and Windows
 
-name: CI
+name: Check mta-cli scripts
 
-# Controls when the workflow will run
-on:
-  
+
+on: 
   pull_request:
     branches: [ master ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+
   # build_windup job
   build_windup:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
     steps:
@@ -42,7 +40,6 @@ jobs:
       
   # build_windup_rulesets job
   build_windup_rulesets:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
     needs: build_windup
 
@@ -69,7 +66,6 @@ jobs:
 
   # build_cli job
   build_cli:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
     needs: [build_windup, build_windup_rulesets]
 
@@ -87,7 +83,7 @@ jobs:
         path: ~/.m2
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
-    - name: Build on JDK 11
+    - name: Build on JDK 8
       run: mvn -B clean install
     - name: upload  mta-cli zip
       uses: actions/upload-artifact@v2
@@ -97,8 +93,7 @@ jobs:
         retention-days: 5
           
   # "linux-script-check" job
-  linux-script-check:
-    
+  linux-script-check:    
     runs-on: ubuntu-latest
     needs: build_cli
 
@@ -116,8 +111,7 @@ jobs:
           ./mta-cli discoverTargets
           
   # "windows-script-check" job
-  windows-script-check:
-  
+  windows-script-check:  
     runs-on: windows-latest
     needs: [build_cli, linux-script-check]
 
