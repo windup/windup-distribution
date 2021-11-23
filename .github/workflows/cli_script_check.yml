@@ -131,5 +131,5 @@ jobs:
       - name: unzip and run mta-cli
         run: |
           unzip mta-cli*offline.zip
-          cd mta-cli*/bin
+          cd mta-cli*\bin
           cmd.exe mta-cli.bat discoverTargets
