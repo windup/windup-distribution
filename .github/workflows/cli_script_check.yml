@@ -93,8 +93,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: mta-cli-zip
-        path: |
-          target/mta-cli{*}.zip  
+        path: target/*.zip  
         retention-days: 5
           
   # "linux-script-check" job
