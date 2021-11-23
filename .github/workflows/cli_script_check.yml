@@ -123,13 +123,15 @@ jobs:
 
     steps:
       
-      - name: Download mta-cli-zip
-        uses: actions/download-artifact@v2
-        with:
-          name: mta-cli-zip
+    #  - name: Download mta-cli-zip
+    #    uses: actions/download-artifact@v2
+    #    with:
+    #      name: mta-cli-zip
 
       - name: unzip and run mta-cli
         run: |
-          unzip mta-cli*offline.zip
-          cd mta-cli*/bin
           mta-cli.bat discoverTargets
+
+    #      unzip mta-cli*offline.zip
+    #      cd mta-cli*/bin
+    #    mta-cli.bat discoverTargets
