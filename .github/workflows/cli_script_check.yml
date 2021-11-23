@@ -99,7 +99,10 @@ jobs:
   # "linux-script-check" job
   linux-script-check:
     
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
     needs: build_cli
 
     steps:
@@ -113,7 +116,7 @@ jobs:
         run: |
           unzip mta-cli*offline.zip
           cd mta-cli*/bin
-          ./mta-cli discoverTargets
+          mta-cli discoverTargets
           
   # "windows-script-check" job
   windows-script-check:
