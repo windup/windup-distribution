@@ -123,10 +123,10 @@ jobs:
 
     steps:
       
-    #  - name: Download mta-cli-zip
-    #    uses: actions/download-artifact@v2
-    #    with:
-    #      name: mta-cli-zip
+      - name: Download mta-cli-zip
+        uses: actions/download-artifact@v2
+        with:
+          name: mta-cli-zip
 
       - name: unzip and run mta-cli
         run: |
