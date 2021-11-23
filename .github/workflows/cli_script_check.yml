@@ -112,8 +112,8 @@ jobs:
       - name: unzip and run mta-cli
         run: |
           unzip mta-cli*offline.zip
-          cd mta-cli{*}/bin
-          mta-cli discoverTargets
+          cd mta-cli*/bin
+          ./mta-cli discoverTargets
           
   # "windows-script-check" job
   windows-script-check:
