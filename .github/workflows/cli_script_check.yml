@@ -4,9 +4,7 @@ name: CI
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
-  push:
-    branches: [ master ]
+  
   pull_request:
     branches: [ master ]
 
@@ -91,6 +89,13 @@ jobs:
         restore-keys: ${{ runner.os }}-m2
     - name: Build on JDK 11
       run: mvn -B clean install
+    - name: upload  mta-cli zip
+      uses: actions/upload-artifact@v2
+      with:
+        name: mta-cli-zip
+        path: |
+          target/mta-cli{*}.zip  
+        retention-days: 5
           
   # "linux-script-check" job
   linux-script-check:
@@ -100,12 +105,16 @@ jobs:
 
     steps:
       
-      - uses: actions/checkout@v2
+      - name: Download mta-cli-zip
+        uses: actions/download-artifact@v2
+        with:
+          name: mta-cli-zip
 
-      - name: Run a multi-line script
+      - name: unzip and run mta-cli
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          unzip mta-cli{*}.zip
+          cd mta-cli{*}/bin
+          mta-cli discoverTargets
           
   # "windows-script-check" job
   windows-script-check:
