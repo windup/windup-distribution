@@ -132,4 +132,4 @@ jobs:
         run: |
           unzip mta-cli*offline.zip
           cd mta-cli*/bin
-          mta-cli discoverTargets
+          mta-cli.bat discoverTargets
