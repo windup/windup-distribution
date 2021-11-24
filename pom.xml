@@ -181,6 +181,18 @@
                             </descriptors>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>distribution-no-index</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>src/main/assembly/assembly-no-index.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
         </plugins>
