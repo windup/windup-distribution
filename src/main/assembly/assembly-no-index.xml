@@ -51,6 +51,16 @@
             <includes>
                 <include>**</include>
             </includes>
+            <excludes>
+                <exclude>*/rewrite.yml</exclude>
+            </excludes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.build.directory}/rules/openrewrite</directory>
+            <outputDirectory>rules/openrewrite</outputDirectory>
+            <includes>
+                <include>rewrite.yml</include>
+            </includes>
         </fileSet>
     </fileSets>
 
