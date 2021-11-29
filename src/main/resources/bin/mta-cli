@@ -272,7 +272,7 @@ fi
 MTA_OPTS="$MTA_OPTS $FILE_DESCRIPTOR_OPTS";
 
 if [ "$RUN_OPENREWRITE" != "" ] ; then
-	( cd "$TRANSFORM_PROJECT_PATH"; exec mvn org.openrewrite.maven:rewrite-maven-plugin:4.13.0:"${OPENREWRITE_GOAL}" -Drewrite.configLocation="${MTA_HOME}"/rules/openrewrite/rewrite.yml "${OPENREWRITE_QUOTED_ARGS[@]}" )
+	( cd "$TRANSFORM_PROJECT_PATH"; exec mvn org.openrewrite.maven:rewrite-maven-plugin:4.13.0:"${OPENREWRITE_GOAL}" -DconfigLocation="${MTA_HOME}"/rules/openrewrite/rewrite.yml "${OPENREWRITE_QUOTED_ARGS[@]}" )
 	exit 0;
 
 fi
