@@ -15,7 +15,7 @@
 
     <groupId>org.jboss.windup</groupId>
     <artifactId>mta-cli</artifactId>
-    <version>5.2.1.Final</version>
+    <version>5.2.2-SNAPSHOT</version>
 
     <name>MTA - Distribution Build</name>
     <packaging>pom</packaging>
@@ -264,7 +264,7 @@
     </profiles>
 
     <scm>
-        <tag>5.2.1.Final</tag>
+        <tag>${version.windup}</tag>
         <connection>${windup.scm.connection}</connection>
         <developerConnection>${windup.developer.connection}</developerConnection>
         <url>${windup.scm.url}</url>
