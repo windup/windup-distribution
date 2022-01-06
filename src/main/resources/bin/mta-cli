@@ -31,6 +31,8 @@ RUN_OPENREWRITE=()
 TRANSFORM_PROJECT_PATH=()
 OPENREWRITE_QUOTED_ARGS=()
 OPENREWRITE_GOAL=( "dryRun" )
+REPO_URL=()
+REPO_BRANCH=()
 
 ## Increase the open file limit if low, to what we need or at least to the hard limit.
 ## Complain if the hard limit is lower than what we need.
@@ -99,6 +101,22 @@ while [ "$1" != "" ] ; do
     OPENREWRITE_GOAL=("$2")
   elif [ "$1" = "$OPENREWRITE_GOAL" ] ; then
   	goalfound=true
+  elif [ "$1" = "--repoUrl" ] ; then
+    REPO_URL=("$2")
+    shift
+    continue
+  elif [ "$1" = "$REPO_URL" ] ; then
+  	repofound=true
+  	shift
+  	continue
+  elif [ "$1" = "--repoBranch" ] ; then
+    REPO_BRANCH=("$2")
+    shift
+    continue
+  elif [ "$1" = "$REPO_BRANCH" ] ; then
+  	branchfound=true
+  	shift
+  	continue
   else
   	OPENREWRITE_QUOTED_ARGS+=("$1")
   fi 
@@ -274,6 +292,45 @@ MTA_OPTS="$MTA_OPTS $FILE_DESCRIPTOR_OPTS";
 if [ "$RUN_OPENREWRITE" != "" ] ; then
 	( cd "$TRANSFORM_PROJECT_PATH"; exec mvn org.openrewrite.maven:rewrite-maven-plugin:4.13.0:"${OPENREWRITE_GOAL}" -DconfigLocation="${MTA_HOME}"/rules/openrewrite/rewrite.yml "${OPENREWRITE_QUOTED_ARGS[@]}" )
 	exit 0;
+
+fi
+
+if [ "$REPO_URL" != "" ] ; then
+  
+  RESPONSE_CODE=$(curl -L --write-out %{http_code} --silent --output /dev/null https://"${REPO_URL}"/info/refs?service=git-upload-pack)
+  
+  if [ "$RESPONSE_CODE" != 200 ] ; then
+  
+  	echo ${REPO_URL} is a private repo. You must provide a valid token to access it.
+  	read -sp 'Access Token: ' repoToken
+  	
+  	if [ "$repoToken" == "" ] ; then
+  		echo -e \\nNo token provided to access private repo. Aborting.
+  		exit 0;
+  	fi
+  	
+  fi
+  
+  echo -e \\nDownloading repo ${REPO_URL}
+  
+  if [[ $REPO_URL == *github* ]]; then
+  	RESPONSE_CODE_DOWNLOAD=$(curl -Lo repo.zip -w %{http_code} https://"${repoToken}"@"${REPO_URL}"/archive/refs/heads/"${REPO_BRANCH}".zip)
+  fi
+  if [[ $REPO_URL == *gitlab* ]]; then
+  	RESPONSE_CODE_DOWNLOAD=$(curl -Lo repo.zip -w %{http_code} https://"${REPO_URL}"/-/archive/"${REPO_BRANCH}"/*-"${REPO_BRANCH}".zip?private_token="${repoToken}")
+  fi
+  
+  unzip -tqq repo.zip > /dev/null 2>&1
+  
+  if [ $? -ne 0 ] ; then
+  	echo Repo download unsuccessful. Aborting!
+  	exit 0;
+  fi
+
+  QUOTED_ARGS+=("--input")
+  QUOTED_ARGS+=("./repo.zip")
+  QUOTED_ARGS+=("--inputApplicationName")
+  QUOTED_ARGS+=(${REPO_URL})
 
 fi
 
