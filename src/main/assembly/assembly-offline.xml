@@ -52,7 +52,7 @@
                 <include>**</include>
             </includes>
             <excludes>
-                <exclude>*/rewrite.yml</exclude>
+                <exclude>openrewrite/</exclude>
             </excludes>
         </fileSet>
         <fileSet>
