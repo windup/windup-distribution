@@ -1,0 +1,46 @@
+name: Windup PR builder for JDK11
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          repository: windup/windup-rulesets
+          path: windup-rulesets
+      - uses: actions/checkout@v2
+        with:
+          repository: windup/windup
+          path: windup
+      - uses: actions/checkout@v2
+        with:
+          path: windup-distribution
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+          java-package: jdk
+          cache: 'maven'
+
+      - name: Build Windup Rulesets
+        run: mvn clean install -DskipTests -f windup-rulesets/
+      - name: Build Windup
+        run: mvn clean install -DskipTests -f windup/
+      - name: Build Windup distribution
+        run: mvn clean install -DskipTests -f windup-distribution/
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: cli
+          path: windup-distribution/target/*-offline.zip
+
+
