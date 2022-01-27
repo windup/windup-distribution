@@ -82,6 +82,13 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <filtering>false</filtering>
+                <directory>resources</directory>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.jboss.forge.furnace</groupId>
@@ -259,6 +266,46 @@
                         </executions>
                     </plugin>
                 </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>mta</id>
+            <activation>
+                <property>
+                    <name>!community</name>
+                </property>
+            </activation>
+            <properties>
+                <flavor>mta</flavor>
+            </properties>
+            <build>
+                <resources>
+                    <resource>
+                        <filtering>false</filtering>
+                        <directory>resources-mta</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+        <profile>
+            <id>windup</id>
+            <activation>
+                <property>
+                    <name>community</name>
+                </property>
+            </activation>
+            <properties>
+                <flavor>windup</flavor>
+            </properties>
+            <build>
+                <finalName>windup-cli-${project.version}</finalName>
+                <resources>
+                    <resource>
+                        <filtering>false</filtering>
+                        <directory>resources-windup</directory>
+                    </resource>
+                </resources>
             </build>
         </profile>
     </profiles>

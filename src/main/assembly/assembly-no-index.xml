@@ -15,7 +15,7 @@
             <outputDirectory/>
             <filtered>true</filtered>
             <includes>
-               <include>/mta-cli-version.txt</include>
+               <include>/*-cli-version.txt</include>
                <include>/README.txt</include>
             </includes>
         </fileSet>
@@ -27,10 +27,33 @@
                 <include>**</include>
             </includes>
             <excludes>
-               <exclude>/mta-cli-version.txt</exclude>
+               <exclude>/*-cli-version.txt</exclude>
                <exclude>/README.txt</exclude>
             </excludes>
         </fileSet>
+
+        <fileSet>
+            <directory>src/main/resources-${flavor}</directory>
+            <outputDirectory/>
+            <filtered>true</filtered>
+            <includes>
+                <include>/*-cli-version.txt</include>
+                <include>/README.txt</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/resources-${flavor}</directory>
+            <outputDirectory/>
+            <filtered>false</filtered>
+            <includes>
+                <include>**</include>
+            </includes>
+            <excludes>
+                <exclude>/*-cli-version.txt</exclude>
+                <exclude>/README.txt</exclude>
+            </excludes>
+        </fileSet>
+
         <fileSet>
             <directory>${project.build.directory}/addons</directory>
             <outputDirectory>addons</outputDirectory>
