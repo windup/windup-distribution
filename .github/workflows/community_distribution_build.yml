@@ -1,4 +1,4 @@
-name: Windup dommunity distribution
+name: Windup community distribution
 
 on:
   workflow_dispatch:
@@ -30,10 +30,10 @@ jobs:
           java-package: jdk
           cache: 'maven'
 
-      - name: Build Windup Rulesets
-        run: mvn clean install -DskipTests -Dcommunity -f windup-rulesets/
       - name: Build Windup
         run: mvn clean install -DskipTests -Dcommunity -f windup/
+      - name: Build Windup Rulesets
+        run: mvn clean install -DskipTests -Dcommunity -f windup-rulesets/
       - name: Build Windup distribution
         run: mvn clean install -DskipTests -Dcommunity -f windup-distribution/
 
