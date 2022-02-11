@@ -92,10 +92,9 @@ if %JAVAVER_MAJOR% geq 11 (
     SET MODULES="--add-modules=java.se"
     goto chkFHome
 )
-if %JAVAVER_MINOR% geq 8 goto chkFHome
 
 echo.
-echo A Java 1.8 or higher JRE is required to run MTA. "%JAVA_HOME%\bin\java.exe" is version %JAVAVER%
+echo A Java 11 or higher JRE is required to run MTA. "%JAVA_HOME%\bin\java.exe" is version %JAVAVER%
 echo.
 goto error
 
