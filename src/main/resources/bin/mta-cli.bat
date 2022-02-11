@@ -88,7 +88,6 @@ for /f "delims=. tokens=1-3" %%v in ("%JAVAVER%") do (
 set "JAVAVER_MAJOR=%JAVAVER_MAJOR:~1,2%"
 set MODULES=
 if %JAVAVER_MAJOR% geq 11 (
-    echo TECH PREVIEW Running on JDK %JAVAVER%
     SET MODULES="--add-modules=java.se"
     goto chkFHome
 )
