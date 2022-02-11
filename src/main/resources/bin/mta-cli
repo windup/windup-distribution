@@ -225,7 +225,7 @@ case $JAVAVER in
     echo "TECH PREVIEW Running on JDK $JAVAVER"
 ;;
 *1.[1-9]*)
-	echo " Error: a Java 11 or higher JRE is required to run MTA; found [$JAVACMD -version == $JAVAVER]."
+	echo " Error: a Java 11 JRE is required to run MTA; found [$JAVACMD -version == $JAVAVER]."
 	exit 1
  ;;
 esac
