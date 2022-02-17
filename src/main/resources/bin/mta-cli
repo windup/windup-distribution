@@ -221,9 +221,9 @@ MODULES=""
 JAVAVER=`"$JAVACMD" -version 2>&1`
 case $JAVAVER in
 *"11"*)
-    MODULES="--add-modules=java.se"
-;;
-*1.[1-9]*)
+  MODULES="--add-modules=java.se"
+ ;;
+*)
 	echo " Error: a Java 11 JRE is required to run MTA; found [$JAVACMD -version == $JAVAVER]."
 	exit 1
  ;;
