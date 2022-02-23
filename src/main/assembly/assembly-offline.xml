@@ -52,14 +52,14 @@
                 <include>**</include>
             </includes>
             <excludes>
-                <exclude>*/rewrite.yml</exclude>
+                <exclude>openrewrite/</exclude>
             </excludes>
         </fileSet>
         <fileSet>
             <directory>${project.build.directory}/rules/openrewrite</directory>
             <outputDirectory>rules/openrewrite</outputDirectory>
             <includes>
-                <include>rewrite.yml</include>
+                <include>**</include>
             </includes>
         </fileSet>
     </fileSets>
