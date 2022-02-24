@@ -215,7 +215,7 @@ if %RUN_OPENREWRITE%==false goto runMTA_CLI
 
 :runOpenrewrite
 PUSHD "%OR_TRANSFORM_PATH%"
-mvn "org.openrewrite.maven:rewrite-maven-plugin:4.13.0:%OR_GOAL%" "-DconfigLocation=%MTA_HOME%\rules\openrewrite\rewrite.yml" %OR_CMD_LINE_ARGS%
+mvn "org.openrewrite.maven:rewrite-maven-plugin:4.13.0:%OR_GOAL%"  %OR_CMD_LINE_ARGS%
 POPD
 
 if ERRORLEVEL 1 goto error

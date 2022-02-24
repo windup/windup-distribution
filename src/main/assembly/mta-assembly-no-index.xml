@@ -60,7 +60,7 @@
             <directory>${project.build.directory}/rules/openrewrite</directory>
             <outputDirectory>rules/openrewrite</outputDirectory>
             <includes>
-                <include>rewrite.yml</include>
+                <include>**</include>
             </includes>
         </fileSet>
 
