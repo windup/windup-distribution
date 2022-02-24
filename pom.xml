@@ -184,7 +184,7 @@
                         </goals>
                         <configuration>
                             <descriptors>
-                                <descriptor>src/main/assembly/assembly-offline.xml</descriptor>
+                                <descriptor>src/main/assembly/${flavor}-assembly-offline.xml</descriptor>
                             </descriptors>
                         </configuration>
                     </execution>
@@ -196,7 +196,7 @@
                         </goals>
                         <configuration>
                             <descriptors>
-                                <descriptor>src/main/assembly/assembly-no-index.xml</descriptor>
+                                <descriptor>src/main/assembly/${flavor}-assembly-no-index.xml</descriptor>
                             </descriptors>
                         </configuration>
                     </execution>

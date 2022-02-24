@@ -1,6 +1,6 @@
-# bash completion for windup-cli                               -*- shell-script -*-
+# bash completion commons for cli                               -*- shell-script -*-
 
-windup-cli()
+_cli()
 {
     local cur prev opts type
     local cmd="${1}"
@@ -40,7 +40,3 @@ windup-cli()
         return 0
     fi
 }
-
-complete -F _windup-cli windup-cli
-
-# ex: ts=4 sw=4 et filetype=sh

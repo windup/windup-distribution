@@ -104,7 +104,7 @@ goto error
 if "%OS%"=="Windows_NT" SET "SCRIPT_HOME=%~dp0.."
 if "%OS%"=="WINNT" SET "SCRIPT_HOME=%~dp0.."
 
-if exist "%SCRIPT_HOME%\mta-cli-version.txt" set "MTA_HOME=%SCRIPT_HOME%"
+if exist "%SCRIPT_HOME%\cli-version.txt" set "MTA_HOME=%SCRIPT_HOME%"
 
 if not "%MTA_HOME%"=="" goto valFHome
 
