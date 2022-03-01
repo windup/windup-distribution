@@ -87,15 +87,13 @@ for /f "delims=. tokens=1-3" %%v in ("%JAVAVER%") do (
 )
 set "JAVAVER_MAJOR=%JAVAVER_MAJOR:~1,2%"
 set MODULES=
-if %JAVAVER_MAJOR% geq 11 (
-    echo TECH PREVIEW Running on JDK %JAVAVER%
+if %JAVAVER_MAJOR% equ 11 (
     SET MODULES="--add-modules=java.se"
     goto chkFHome
 )
-if %JAVAVER_MINOR% geq 8 goto chkFHome
 
 echo.
-echo A Java 1.8 or higher JRE is required to run MTA. "%JAVA_HOME%\bin\java.exe" is version %JAVAVER%
+echo A Java 11 JRE is required to run MTA. "%JAVA_HOME%\bin\java.exe" is version %JAVAVER%
 echo.
 goto error
 
