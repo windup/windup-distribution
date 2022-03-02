@@ -143,7 +143,7 @@ fi
 
 if [ -n "$MTA_HOME" ] ; then
     # Detect if this script is in a MTA directory
-    if [ ! -f "$SCRIPT_HOME/mta-cli-version.txt" ] ; then
+    if [ ! -f "$SCRIPT_HOME/cli-version.txt" ] ; then
         # If it is, then use it as MTA_HOME
         echo "Resetting MTA_HOME to $SCRIPT_HOME (from: $MTA_HOME)"
 
