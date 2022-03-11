@@ -19,6 +19,10 @@ To build this project, type:
 
         mvn clean install
 
+If you want to build this project using SNAPSHOTs, add the `settings.xml` file to the command line:
+
+        mvn -s settings.xml clean install
+
 This creates a `mta-distribution-<VERSION>-offline.zip` file in the `mta-distribution/target/` directory.
 
 == Additional Resources
