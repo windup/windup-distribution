@@ -1,8 +1,0 @@
-# bash completion for windup-cli                               -*- shell-script -*-
-
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
-source $DIR/install-common.sh
-complete -F _cli windup-cli
-
-# ex: ts=4 sw=4 et filetype=sh

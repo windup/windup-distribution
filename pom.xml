@@ -184,7 +184,7 @@
                         </goals>
                         <configuration>
                             <descriptors>
-                                <descriptor>src/main/assembly/${flavor}-assembly-offline.xml</descriptor>
+                                <descriptor>src/main/assembly/assembly-offline.xml</descriptor>
                             </descriptors>
                         </configuration>
                     </execution>
@@ -196,7 +196,7 @@
                         </goals>
                         <configuration>
                             <descriptors>
-                                <descriptor>src/main/assembly/${flavor}-assembly-no-index.xml</descriptor>
+                                <descriptor>src/main/assembly/assembly-no-index.xml</descriptor>
                             </descriptors>
                         </configuration>
                     </execution>
@@ -270,44 +270,65 @@
         </profile>
 
         <profile>
-            <id>mta</id>
-            <activation>
-                <property>
-                    <name>!community</name>
-                </property>
-            </activation>
-            <properties>
-                <flavor>mta</flavor>
-            </properties>
-            <build>
-                <resources>
-                    <resource>
-                        <filtering>false</filtering>
-                        <directory>resources-mta</directory>
-                    </resource>
-                </resources>
-            </build>
-        </profile>
-        <profile>
             <id>windup</id>
             <activation>
                 <property>
-                    <name>community</name>
+                    <name>!downstream</name>
                 </property>
             </activation>
             <properties>
-                <flavor>windup</flavor>
+                <downstream-name>windup</downstream-name>
             </properties>
             <build>
                 <finalName>windup-cli-${project.version}</finalName>
-                <resources>
-                    <resource>
-                        <filtering>false</filtering>
-                        <directory>resources-windup</directory>
-                    </resource>
-                </resources>
             </build>
         </profile>
+        <profile>
+            <id>mta</id>
+            <activation>
+                <property>
+                    <name>downstream</name>
+                    <value>mta</value>
+                </property>
+            </activation>
+            <properties>
+                <downstream-name>mta</downstream-name>
+            </properties>
+            <build>
+                <finalName>mta-cli-${project.version}</finalName>
+            </build>
+        </profile>
+        <profile>
+            <id>tackle</id>
+            <activation>
+                <property>
+                    <name>downstream</name>
+                    <value>tackle</value>
+                </property>
+            </activation>
+            <properties>
+                <downstream-name>tackle</downstream-name>
+            </properties>
+            <build>
+                <finalName>tackle-cli-${project.version}</finalName>
+            </build>
+        </profile>
+        <profile>
+            <id>mtr</id>
+            <activation>
+                <property>
+                    <name>downstream</name>
+                    <value>mtr</value>
+                </property>
+            </activation>
+            <properties>
+                <downstream-name>mtr</downstream-name>
+            </properties>
+            <build>
+                <finalName>mtr-cli-${project.version}</finalName>
+            </build>
+        </profile>
+
     </profiles>
 
     <scm>

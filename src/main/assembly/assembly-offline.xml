@@ -1,5 +1,6 @@
-<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
 
     <id>offline</id>
     <formats>
@@ -15,8 +16,9 @@
             <outputDirectory/>
             <filtered>true</filtered>
             <includes>
-               <include>/cli-version.txt</include>
-               <include>/README.txt</include>
+                <include>/cli-version.txt</include>
+                <include>/README.txt</include>
+                <include>/bash-completion/cli</include>
             </includes>
         </fileSet>
         <fileSet>
@@ -27,8 +29,10 @@
                 <include>**</include>
             </includes>
             <excludes>
-               <exclude>/cli-version.txt</exclude>
-               <exclude>/README.txt</exclude>
+                <exclude>/cli-version.txt</exclude>
+                <exclude>/README.txt</exclude>
+                <exclude>/bash-completion/cli</exclude>
+                <exclude>/bin/**</exclude>
             </excludes>
         </fileSet>
 
@@ -65,7 +69,7 @@
         </fileSet>
 
         <fileSet>
-            <directory>src/main/resources-${flavor}</directory>
+            <directory>src/main/resources-${downstream-name}</directory>
             <outputDirectory/>
             <filtered>false</filtered>
             <includes>
@@ -92,4 +96,19 @@
             </includes>
         </dependencySet>
     </dependencySets>
+
+    <files>
+        <file>
+            <source>src/main/resources/bin/cli</source>
+            <outputDirectory>/bin</outputDirectory>
+            <filtered>false</filtered>
+            <destName>${downstream-name}-cli</destName>
+        </file>
+        <file>
+            <source>src/main/resources/bin/cli.bat</source>
+            <outputDirectory>/bin</outputDirectory>
+            <filtered>false</filtered>
+            <destName>${downstream-name}-cli.bat</destName>
+        </file>
+    </files>
 </assembly>

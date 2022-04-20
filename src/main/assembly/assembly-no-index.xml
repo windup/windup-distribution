@@ -15,11 +15,10 @@
             <outputDirectory/>
             <filtered>true</filtered>
             <includes>
+                <include>/cli-version.txt</include>
                 <include>/README.txt</include>
+                <include>/bash-completion/cli</include>
             </includes>
-            <excludes>
-                <exclude>/cli-version.txt</exclude>
-            </excludes>
         </fileSet>
         <fileSet>
             <directory>src/main/resources</directory>
@@ -31,6 +30,7 @@
             <excludes>
                 <exclude>/cli-version.txt</exclude>
                 <exclude>/README.txt</exclude>
+                <exclude>/bash-completion/cli</exclude>
                 <exclude>/bin/**</exclude>
             </excludes>
         </fileSet>
@@ -68,7 +68,7 @@
         </fileSet>
 
         <fileSet>
-            <directory>src/main/resources-${flavor}</directory>
+            <directory>src/main/resources-${downstream-name}</directory>
             <outputDirectory/>
             <filtered>false</filtered>
             <includes>
@@ -89,16 +89,16 @@
 
     <files>
         <file>
-            <source>src/main/resources/bin/mta-cli</source>
+            <source>src/main/resources/bin/cli</source>
             <outputDirectory>/bin</outputDirectory>
             <filtered>false</filtered>
-            <destName>windup-cli</destName>
+            <destName>${downstream-name}-cli</destName>
         </file>
         <file>
-            <source>src/main/resources/bin/mta-cli.bat</source>
+            <source>src/main/resources/bin/cli.bat</source>
             <outputDirectory>/bin</outputDirectory>
             <filtered>false</filtered>
-            <destName>windup-cli.bat</destName>
+            <destName>${downstream-name}-cli.bat</destName>
         </file>
     </files>
 
