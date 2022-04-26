@@ -1,7 +1,11 @@
-name: Windup community distribution
+name: Windup downstream distribution
 
 on:
   workflow_dispatch:
+    inputs:
+      theme:
+        description: "Theme to build: mta, tackle, or mtr"
+        required: true
   schedule:
     - cron: "0 0 * * *"
 
@@ -31,11 +35,11 @@ jobs:
           cache: 'maven'
 
       - name: Build Windup
-        run: mvn clean install -DskipTests -Dcommunity -f windup/
+        run: mvn clean install -DskipTests -Ddownstream=${{ github.event.inputs.theme }} -f windup/
       - name: Build Windup Rulesets
-        run: mvn clean install -DskipTests -Dcommunity -f windup-rulesets/
+        run: mvn clean install -DskipTests -Ddownstream=${{ github.event.inputs.theme }} -f windup-rulesets/
       - name: Build Windup distribution
-        run: mvn clean install -DskipTests -Dcommunity -f windup-distribution/
+        run: mvn clean install -DskipTests -Ddownstream=${{ github.event.inputs.theme }} -f windup-distribution/
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
