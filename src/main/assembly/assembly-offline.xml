@@ -69,7 +69,7 @@
         </fileSet>
 
         <fileSet>
-            <directory>src/main/resources-${downstream-name}</directory>
+            <directory>src/main/resources-${product-name}</directory>
             <outputDirectory/>
             <filtered>false</filtered>
             <includes>
@@ -102,13 +102,13 @@
             <source>src/main/resources/bin/cli</source>
             <outputDirectory>/bin</outputDirectory>
             <filtered>false</filtered>
-            <destName>${downstream-name}-cli</destName>
+            <destName>${product-name}-cli</destName>
         </file>
         <file>
             <source>src/main/resources/bin/cli.bat</source>
             <outputDirectory>/bin</outputDirectory>
             <filtered>false</filtered>
-            <destName>${downstream-name}-cli.bat</destName>
+            <destName>${product-name}-cli.bat</destName>
         </file>
     </files>
 </assembly>

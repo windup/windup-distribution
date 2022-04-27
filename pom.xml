@@ -277,7 +277,7 @@
                 </property>
             </activation>
             <properties>
-                <downstream-name>windup</downstream-name>
+                <product-name>windup</product-name>
             </properties>
             <build>
                 <finalName>windup-cli-${project.version}</finalName>
@@ -292,7 +292,7 @@
                 </property>
             </activation>
             <properties>
-                <downstream-name>mta</downstream-name>
+                <product-name>mta</product-name>
             </properties>
             <build>
                 <finalName>mta-cli-${project.version}</finalName>
@@ -307,7 +307,7 @@
                 </property>
             </activation>
             <properties>
-                <downstream-name>tackle</downstream-name>
+                <product-name>tackle</product-name>
             </properties>
             <build>
                 <finalName>tackle-cli-${project.version}</finalName>
@@ -322,7 +322,7 @@
                 </property>
             </activation>
             <properties>
-                <downstream-name>mtr</downstream-name>
+                <product-name>mtr</product-name>
             </properties>
             <build>
                 <finalName>mtr-cli-${project.version}</finalName>
