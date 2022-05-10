@@ -18,7 +18,6 @@
             <includes>
                 <include>/cli-version.txt</include>
                 <include>/README.txt</include>
-                <include>/bash-completion/cli</include>
             </includes>
         </fileSet>
         <fileSet>
@@ -31,8 +30,6 @@
             <excludes>
                 <exclude>/cli-version.txt</exclude>
                 <exclude>/README.txt</exclude>
-                <exclude>/bash-completion/cli</exclude>
-                <exclude>/bin/**</exclude>
             </excludes>
         </fileSet>
 
@@ -67,15 +64,6 @@
                 <include>**</include>
             </includes>
         </fileSet>
-
-        <fileSet>
-            <directory>src/main/resources-${product-name}</directory>
-            <outputDirectory/>
-            <filtered>false</filtered>
-            <includes>
-                <include>**</include>
-            </includes>
-        </fileSet>
     </fileSets>
 
     <dependencySets>
@@ -96,19 +84,4 @@
             </includes>
         </dependencySet>
     </dependencySets>
-
-    <files>
-        <file>
-            <source>src/main/resources/bin/cli</source>
-            <outputDirectory>/bin</outputDirectory>
-            <filtered>false</filtered>
-            <destName>${product-name}-cli</destName>
-        </file>
-        <file>
-            <source>src/main/resources/bin/cli.bat</source>
-            <outputDirectory>/bin</outputDirectory>
-            <filtered>false</filtered>
-            <destName>${product-name}-cli.bat</destName>
-        </file>
-    </files>
 </assembly>
