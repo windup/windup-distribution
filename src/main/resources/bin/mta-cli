@@ -177,7 +177,7 @@ if [ -z "$MTA_HOME" ] ; then
   cd "$saveddir"
 fi
 
-echo Using MTA at $MTA_HOME
+echo Using the CLI at $MTA_HOME
 
 # For Cygwin, ensure paths are in UNIX format before anything is touched
 if $cygwin ; then
