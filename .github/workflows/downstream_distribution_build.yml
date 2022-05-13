@@ -1,7 +1,15 @@
-name: Windup community distribution
+name: Windup downstream distribution
 
 on:
   workflow_dispatch:
+    inputs:
+      theme:
+        description: "Theme to build: mta, tackle, or mtr"
+        required: true
+      tag:
+        description: "Branch name or Tag name"
+        required: true
+
   schedule:
     - cron: "0 0 * * *"
 
@@ -14,13 +22,16 @@ jobs:
         with:
           repository: windup/windup-rulesets
           path: windup-rulesets
+          ref: ${{ github.event.inputs.tag }}
       - uses: actions/checkout@v2
         with:
           repository: windup/windup
           path: windup
+          ref: ${{ github.event.inputs.tag }}
       - uses: actions/checkout@v2
         with:
           path: windup-distribution
+          ref: ${{ github.event.inputs.tag }}
 
       - name: Set up JDK 11
         uses: actions/setup-java@v2
@@ -31,11 +42,11 @@ jobs:
           cache: 'maven'
 
       - name: Build Windup
-        run: mvn clean install -DskipTests -Dcommunity -f windup/
+        run: mvn clean install -DskipTests -Ddownstream=${{ github.event.inputs.theme }} -f windup/
       - name: Build Windup Rulesets
-        run: mvn clean install -DskipTests -Dcommunity -f windup-rulesets/
+        run: mvn clean install -DskipTests -Ddownstream=${{ github.event.inputs.theme }} -f windup-rulesets/
       - name: Build Windup distribution
-        run: mvn clean install -DskipTests -Dcommunity -f windup-distribution/
+        run: mvn clean install -DskipTests -Ddownstream=${{ github.event.inputs.theme }} -f windup-distribution/
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2

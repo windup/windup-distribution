@@ -1,7 +1,7 @@
 <assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
 
-    <id>offline</id>
+    <id>no-index</id>
     <formats>
         <format>zip</format>
     </formats>
@@ -15,8 +15,8 @@
             <outputDirectory/>
             <filtered>true</filtered>
             <includes>
-               <include>/cli-version.txt</include>
-               <include>/README.txt</include>
+                <include>/cli-version.txt</include>
+                <include>/README.txt</include>
             </includes>
         </fileSet>
         <fileSet>
@@ -27,8 +27,8 @@
                 <include>**</include>
             </includes>
             <excludes>
-               <exclude>/cli-version.txt</exclude>
-               <exclude>/README.txt</exclude>
+                <exclude>/cli-version.txt</exclude>
+                <exclude>/README.txt</exclude>
             </excludes>
         </fileSet>
 
@@ -53,21 +53,12 @@
                 <include>**</include>
             </includes>
             <excludes>
-                <exclude>openrewrite/</exclude>
+                <exclude>*/rewrite.yml</exclude>
             </excludes>
         </fileSet>
         <fileSet>
             <directory>${project.build.directory}/rules/openrewrite</directory>
             <outputDirectory>rules/openrewrite</outputDirectory>
-            <includes>
-                <include>**</include>
-            </includes>
-        </fileSet>
-
-        <fileSet>
-            <directory>src/main/resources-${flavor}</directory>
-            <outputDirectory/>
-            <filtered>false</filtered>
             <includes>
                 <include>**</include>
             </includes>
@@ -81,15 +72,6 @@
             <excludes>
                 <exclude>org.jboss.windup.maven:nexus-indexer-data:zip:*</exclude>
             </excludes>
-        </dependencySet>
-
-        <dependencySet>
-            <outputDirectory>cache/nexus-indexer-data/</outputDirectory>
-            <useProjectArtifact>false</useProjectArtifact>
-            <unpack>true</unpack>
-            <includes>
-                <include>org.jboss.windup.maven:nexus-indexer-data:zip:*</include>
-            </includes>
         </dependencySet>
     </dependencySets>
 </assembly>

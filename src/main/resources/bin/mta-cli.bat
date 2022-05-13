@@ -222,7 +222,7 @@ goto end
 @REM Start MTA
 :runMTA_CLI
 
-echo Using MTA at %MTA_HOME%
+echo Using the CLI at %MTA_HOME%
 echo Using Java at %JAVA_HOME%
 
 if exist "%MTA_HOME%\addons" set ADDONS_DIR=--immutableAddonDir "%MTA_HOME%\addons"
