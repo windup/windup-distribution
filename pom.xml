@@ -17,7 +17,7 @@
     <artifactId>${product-name}-cli</artifactId>
     <version>5.3.1-SNAPSHOT</version>
 
-    <name>MTA - Distribution Build</name>
+    <name>Windup - Distribution Build</name>
     <packaging>pom</packaging>
 
     <properties>
@@ -228,10 +228,10 @@
                                 <phase>package</phase>
                                 <configuration>
                                     <licensesOutputDirectory>
-                                        ${project.build.directory}/mta-distribution-${project.version}/docs/licenses
+                                        ${project.build.directory}/windup-distribution-${project.version}/docs/licenses
                                     </licensesOutputDirectory>
                                     <licensesOutputFile>
-                                        ${project.build.directory}/mta-distribution-${project.version}/docs/licenses/licenses.xml
+                                        ${project.build.directory}/windup-distribution-${project.version}/docs/licenses/licenses.xml
                                     </licensesOutputFile>
                                 </configuration>
                             </execution>
@@ -270,10 +270,25 @@
         </profile>
 
         <profile>
-            <id>mta</id>
+            <id>windup</id>
             <activation>
                 <property>
                     <name>!downstream</name>
+                </property>
+            </activation>
+            <properties>
+                <product-name>windup</product-name>
+            </properties>
+            <build>
+                <finalName>windup-cli-${project.version}</finalName>
+            </build>
+        </profile>
+        <profile>
+            <id>mta</id>
+            <activation>
+                <property>
+                    <name>downstream</name>
+                    <value>mta</value>
                 </property>
             </activation>
             <properties>

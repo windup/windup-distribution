@@ -1,12 +1,12 @@
-= Migration Toolkit for Applications by Red Hat (MTA) Distribution
+= Windup Distribution
 
 == Overview
 
-This project builds the MTA distribution ZIP file. It includes all launch scripts, batch files, libraries, JARs, add-ons, and configuration files for running MTA.
+This project builds the Windup distribution ZIP file. It includes all launch scripts, batch files, libraries, JARs, add-ons, and configuration files for running Windup.
 
 This projects contains dependencies on the following projects, which must be built first.
 
-* https://github.com/windup/windup-rulesets[windup-rulesets]: This project contains the MTA rules.
+* https://github.com/windup/windup-rulesets[windup-rulesets]: This project contains the Windup rules.
 * https://github.com/windup/windup[windup]: This project contains the Windup core source code.
 
 A script to build this project and its dependencies (above) can be found here: https://github.com/windup/windup-local-build-scripts[windup-local-build-scripts].
@@ -19,7 +19,7 @@ To build this project, type:
 
         mvn clean install
 
-This creates a `mta-distribution-<VERSION>-offline.zip` file in the `mta-distribution/target/` directory.
+This creates a `windup-distribution-<VERSION>-offline.zip` file in the `windup-distribution/target/` directory.
 
 == Additional Resources
 
