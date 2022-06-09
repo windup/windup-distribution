@@ -113,6 +113,7 @@
                                 <addonId>org.jboss.windup.rules.apps:windup-rules-java-ee,${version.windup}</addonId>
                                 <addonId>org.jboss.windup:windup-tooling,${version.windup}</addonId>
                                 <addonId>org.jboss.windup.rules.apps:windup-rules-tattletale,${version.windup}</addonId>
+                                <addonId>org.jboss.windup.rules.apps:windup-rules-java-diva,${version.windup}</addonId>
                             </addonIds>
                         </configuration>
                     </execution>
