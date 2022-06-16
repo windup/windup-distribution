@@ -14,10 +14,10 @@
     </parent>
 
     <groupId>org.jboss.windup</groupId>
-    <artifactId>${product-name}-cli</artifactId>
+    <artifactId>windup-cli-parent</artifactId>
     <version>5.3.1-SNAPSHOT</version>
 
-    <name>MTA - Distribution Build</name>
+    <name>Windup - Distribution Build Parent</name>
     <packaging>pom</packaging>
 
     <properties>
@@ -90,117 +90,186 @@
             </resource>
         </resources>
 
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.jboss.forge.furnace</groupId>
+                    <artifactId>furnace-maven-plugin</artifactId>
+                    <version>${version.furnace}</version>
+                    <executions>
+                        <execution>
+                            <id>deploy-addons</id>
+                            <phase>prepare-package</phase>
+                            <goals>
+                                <goal>addon-install</goal>
+                            </goals>
+                            <configuration>
+                                <addonRepository>${project.build.directory}/addons</addonRepository>
+                                <addonIds>
+                                    <addonId>org.jboss.forge.furnace.container:cdi,${version.furnace}</addonId>
+                                    <addonId>org.jboss.forge.furnace.container:simple,${version.furnace}</addonId>
+                                    <addonId>org.jboss.windup.rules.apps:windup-rules-java,${version.windup}</addonId>
+                                    <addonId>org.jboss.windup.rules.apps:windup-rules-java-project,${version.windup}</addonId>
+                                    <addonId>org.jboss.windup.rules.apps:windup-rules-java-ee,${version.windup}</addonId>
+                                    <addonId>org.jboss.windup:windup-tooling,${version.windup}</addonId>
+                                    <addonId>org.jboss.windup.rules.apps:windup-rules-tattletale,${version.windup}</addonId>
+                                    <addonId>org.jboss.windup.rules.apps:windup-rules-java-diva,${version.windup}</addonId>
+                                </addonIds>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>unpack</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>unpack</goal>
+                            </goals>
+                            <configuration>
+                                <artifactItems>
+                                    <artifactItem>
+                                        <groupId>org.jboss.windup.rules</groupId>
+                                        <artifactId>windup-rulesets</artifactId>
+                                        <overWrite>true</overWrite>
+                                        <outputDirectory>${project.build.directory}/rules</outputDirectory>
+                                    </artifactItem>
+                                </artifactItems>
+                                <excludes>**/tests/**</excludes>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>build-dump</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>java</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <mainClass>org.jboss.windup.bootstrap.Bootstrap</mainClass>
+                        <cleanupDaemonThreads>false</cleanupDaemonThreads>
+                        <arguments>
+                            <argument>--addonDir</argument>
+                            <argument>${project.build.directory}/addons</argument>
+                            <argument>--batchMode</argument>
+                            <argument>--generateCaches</argument>
+                            <argument>--userRulesDirectory</argument>
+                            <argument>${project.build.directory}/rules</argument>
+                        </arguments>
+                        <systemProperties>
+                            <systemProperty>
+                                <key>windup.home</key>
+                                <value>${project.build.directory}/</value>
+                            </systemProperty>
+                        </systemProperties>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>distribution-offline</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>single</goal>
+                            </goals>
+                            <configuration>
+                                <descriptors>
+                                    <descriptor>src/main/assembly/assembly-offline.xml</descriptor>
+                                </descriptors>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>distribution-no-index</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>single</goal>
+                            </goals>
+                            <configuration>
+                                <descriptors>
+                                    <descriptor>src/main/assembly/assembly-no-index.xml</descriptor>
+                                </descriptors>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <plugin>
+                <!-- This declaration makes sure children get plugin in their lifecycle -->
                 <groupId>org.jboss.forge.furnace</groupId>
                 <artifactId>furnace-maven-plugin</artifactId>
-                <version>${version.furnace}</version>
+                <!-- Configuration won't be propagated to children -->
+                <inherited>false</inherited>
                 <executions>
                     <execution>
+                        <!--This matches and thus overrides execution defined above -->
                         <id>deploy-addons</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>addon-install</goal>
-                        </goals>
-                        <inherited>false</inherited>
-                        <configuration>
-                            <addonRepository>${project.build.directory}/addons</addonRepository>
-                            <addonIds>
-                                <addonId>org.jboss.forge.furnace.container:cdi,${version.furnace}</addonId>
-                                <addonId>org.jboss.forge.furnace.container:simple,${version.furnace}</addonId>
-                                <addonId>org.jboss.windup.rules.apps:windup-rules-java,${version.windup}</addonId>
-                                <addonId>org.jboss.windup.rules.apps:windup-rules-java-project,${version.windup}</addonId>
-                                <addonId>org.jboss.windup.rules.apps:windup-rules-java-ee,${version.windup}</addonId>
-                                <addonId>org.jboss.windup:windup-tooling,${version.windup}</addonId>
-                                <addonId>org.jboss.windup.rules.apps:windup-rules-tattletale,${version.windup}</addonId>
-                                <addonId>org.jboss.windup.rules.apps:windup-rules-java-diva,${version.windup}</addonId>
-                            </addonIds>
-                        </configuration>
+                        <!-- Unbind from lifecycle for this POM -->
+                        <phase/>
                     </execution>
                 </executions>
             </plugin>
             <plugin>
+                <!-- This declaration makes sure children get plugin in their lifecycle -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
+                <!-- Configuration won't be propagated to children -->
+                <inherited>false</inherited>
                 <executions>
                     <execution>
+                        <!--This matches and thus overrides execution defined above -->
                         <id>unpack</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.jboss.windup.rules</groupId>
-                                    <artifactId>windup-rulesets</artifactId>
-                                    <overWrite>true</overWrite>
-                                    <outputDirectory>${project.build.directory}/rules</outputDirectory>
-                                </artifactItem>
-                            </artifactItems>
-                            <excludes>**/tests/**</excludes>
-                        </configuration>
+                        <!-- Unbind from lifecycle for this POM -->
+                        <phase/>
                     </execution>
                 </executions>
             </plugin>
             <plugin>
+                <!-- This declaration makes sure children get plugin in their lifecycle -->
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
+                <!-- Configuration won't be propagated to children -->
+                <inherited>false</inherited>
                 <executions>
                     <execution>
+                        <!--This matches and thus overrides execution defined above -->
                         <id>build-dump</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>java</goal>
-                        </goals>
+                        <!-- Unbind from lifecycle for this POM -->
+                        <phase/>
                     </execution>
                 </executions>
-                <configuration>
-                    <mainClass>org.jboss.windup.bootstrap.Bootstrap</mainClass>
-                    <cleanupDaemonThreads>false</cleanupDaemonThreads>
-                    <arguments>
-                        <argument>--addonDir</argument>
-                        <argument>${project.build.directory}/addons</argument>
-                        <argument>--batchMode</argument>
-                        <argument>--generateCaches</argument>
-                        <argument>--userRulesDirectory</argument>
-                        <argument>${project.build.directory}/rules</argument>
-                    </arguments>
-                    <systemProperties>
-                        <systemProperty>
-                            <key>windup.home</key>
-                            <value>${project.build.directory}/</value>
-                        </systemProperty>
-                    </systemProperties>
-                </configuration>
             </plugin>
             <plugin>
+                <!-- This declaration makes sure children get plugin in their lifecycle -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
+                <!-- Configuration won't be propagated to children -->
+                <inherited>false</inherited>
                 <executions>
                     <execution>
+                        <!--This matches and thus overrides execution defined above -->
                         <id>distribution-offline</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                        <configuration>
-                            <descriptors>
-                                <descriptor>src/main/assembly/assembly-offline.xml</descriptor>
-                            </descriptors>
-                        </configuration>
+                        <!-- Unbind from lifecycle for this POM -->
+                        <phase>none</phase>
                     </execution>
                     <execution>
+                        <!--This matches and thus overrides execution defined above -->
                         <id>distribution-no-index</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                        <configuration>
-                            <descriptors>
-                                <descriptor>src/main/assembly/assembly-no-index.xml</descriptor>
-                            </descriptors>
-                        </configuration>
+                        <!-- Unbind from lifecycle for this POM -->
+                        <phase/>
                     </execution>
                 </executions>
             </plugin>
@@ -217,25 +286,44 @@
                 </property>
             </activation>
             <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.codehaus.mojo</groupId>
+                            <artifactId>license-maven-plugin</artifactId>
+                            <executions>
+                                <execution>
+                                    <id>manage-licenses</id>
+                                    <goals>
+                                        <goal>download-licenses</goal>
+                                    </goals>
+                                    <phase>package</phase>
+                                    <configuration>
+                                        <licensesOutputDirectory>
+                                            ${project.build.directory}/mta-distribution-${project.version}/docs/licenses
+                                        </licensesOutputDirectory>
+                                        <licensesOutputFile>
+                                            ${project.build.directory}/mta-distribution-${project.version}/docs/licenses/licenses.xml
+                                        </licensesOutputFile>
+                                    </configuration>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
                 <plugins>
                     <plugin>
+                        <!-- This declaration makes sure children get plugin in their lifecycle -->
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>license-maven-plugin</artifactId>
+                        <!-- Configuration won't be propagated to children -->
                         <inherited>false</inherited>
                         <executions>
                             <execution>
-                                <goals>
-                                    <goal>download-licenses</goal>
-                                </goals>
-                                <phase>package</phase>
-                                <configuration>
-                                    <licensesOutputDirectory>
-                                        ${project.build.directory}/mta-distribution-${project.version}/docs/licenses
-                                    </licensesOutputDirectory>
-                                    <licensesOutputFile>
-                                        ${project.build.directory}/mta-distribution-${project.version}/docs/licenses/licenses.xml
-                                    </licensesOutputFile>
-                                </configuration>
+                                <!--This matches and thus overrides execution defined above -->
+                                <id>manage-licenses</id>
+                                <!-- Unbind from lifecycle for this POM -->
+                                <phase/>
                             </execution>
                         </executions>
                     </plugin>
@@ -278,12 +366,9 @@
                     <name>!downstream</name>
                 </property>
             </activation>
-            <properties>
-                <product-name>mta</product-name>
-            </properties>
-            <build>
-                <finalName>mta-cli-${project.version}</finalName>
-            </build>
+            <modules>
+                <module>mta-cli</module>
+            </modules>
         </profile>
         <profile>
             <id>tackle</id>
@@ -293,12 +378,9 @@
                     <value>tackle</value>
                 </property>
             </activation>
-            <properties>
-                <product-name>tackle</product-name>
-            </properties>
-            <build>
-                <finalName>tackle-cli-${project.version}</finalName>
-            </build>
+            <modules>
+                <module>tackle-cli</module>
+            </modules>
         </profile>
 
     </profiles>
