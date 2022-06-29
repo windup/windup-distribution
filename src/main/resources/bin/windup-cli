@@ -270,7 +270,7 @@ fi
 WINDUP_OPTS="$WINDUP_OPTS $FILE_DESCRIPTOR_OPTS";
 
 if [ "$RUN_OPENREWRITE" != "" ] ; then
-	( cd "$TRANSFORM_PROJECT_PATH"; exec mvn org.openrewrite.maven:rewrite-maven-plugin:4.22.2:"${OPENREWRITE_GOAL}" "${OPENREWRITE_QUOTED_ARGS[@]}" )
+	( cd "$TRANSFORM_PROJECT_PATH"; exec mvn org.openrewrite.maven:rewrite-maven-plugin:4.25.0:"${OPENREWRITE_GOAL}" "${OPENREWRITE_QUOTED_ARGS[@]}" )
 	exit 0;
 
 fi
