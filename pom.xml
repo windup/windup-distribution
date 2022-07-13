@@ -369,6 +369,9 @@
             <properties>
                 <product-name>windup</product-name>
             </properties>
+            <modules>
+                <module>windup-cli</module>
+            </modules>
             <build>
                 <finalName>windup-cli-${project.version}</finalName>
             </build>
@@ -402,12 +405,12 @@
             <properties>
                 <product-name>tackle</product-name>
             </properties>
-            <build>
-                <finalName>tackle-cli-${project.version}</finalName>
-            </build>
             <modules>
                 <module>tackle-cli</module>
             </modules>
+            <build>
+                <finalName>tackle-cli-${project.version}</finalName>
+            </build>
         </profile>
 
     </profiles>
