@@ -23,7 +23,7 @@
     <properties>
         <version.windup>5.3.1-SNAPSHOT</version.windup>
         <version.windup-rulesets>5.3.1-SNAPSHOT</version.windup-rulesets>
-        <version.forge>3.9.8.Final</version.forge>
+        <version.forge>3.10.0.Final</version.forge>
         <version.furnace>2.29.1.Final</version.furnace>
 
         <windup.scm.connection>scm:git:https://github.com/windup/windup-distribution.git</windup.scm.connection>
