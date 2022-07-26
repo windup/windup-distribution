@@ -6,7 +6,7 @@
 @REM ----------------------------------------------------------------------------
 
 @REM ----------------------------------------------------------------------------
-@REM MTA Startup script
+@REM WINDUP Startup script
 @REM
 @REM Required Environment vars:
 @REM ------------------
@@ -14,8 +14,8 @@
 @REM
 @REM Optional Environment vars
 @REM ------------------
-@REM MTA_HOME - location of MTA's installed home dir
-@REM MTA_OPTS - parameters passed to the Java VM when running MTA
+@REM WINDUP_HOME - location of WINDUP's installed home dir
+@REM WINDUP_OPTS - parameters passed to the Java VM when running WINDUP
 @REM MAX_MEMORY - Maximum Java Heap (example: 2048m)
 @REM MAX_METASPACE_SIZE - Maximum Metaspace size (example: 256m)
 @REM RESERVED_CODE_CACHE_SIZE - Hotspot code cache size (example: 128m)
@@ -35,11 +35,11 @@ set "USERHOME=%HOMEDRIVE%%HOMEPATH%"
 :OkUserhome
 
 @REM Remove extraneous quotes from variables
-if not "%MTA_HOME%" == "" set MTA_HOME=%MTA_HOME:"=%
+if not "%WINDUP_HOME%" == "" set WINDUP_HOME=%WINDUP_HOME:"=%
 if not "%JAVA_HOME%" == "" set JAVA_HOME=%JAVA_HOME:"=%
 
 @REM Execute a user defined script before this one
-if exist "%USERHOME%\mtarc_pre.bat" call "%USERHOME%\mtarc_pre.bat"
+if exist "%USERHOME%\winduprc_pre.bat" call "%USERHOME%\winduprc_pre.bat"
 
 set ERROR_CODE=0
 
@@ -93,7 +93,7 @@ if %JAVAVER_MAJOR% equ 11 (
 )
 
 echo.
-echo A Java 11 JRE is required to run MTA. "%JAVA_HOME%\bin\java.exe" is version %JAVAVER%
+echo A Java 11 JRE is required to run WINDUP. "%JAVA_HOME%\bin\java.exe" is version %JAVAVER%
 echo.
 goto error
 
@@ -102,36 +102,36 @@ goto error
 if "%OS%"=="Windows_NT" SET "SCRIPT_HOME=%~dp0.."
 if "%OS%"=="WINNT" SET "SCRIPT_HOME=%~dp0.."
 
-if exist "%SCRIPT_HOME%\cli-version.txt" set "MTA_HOME=%SCRIPT_HOME%"
+if exist "%SCRIPT_HOME%\cli-version.txt" set "WINDUP_HOME=%SCRIPT_HOME%"
 
-if not "%MTA_HOME%"=="" goto valFHome
+if not "%WINDUP_HOME%"=="" goto valFHome
 
-if "%OS%"=="Windows_NT" SET "MTA_HOME=%~dp0.."
-if "%OS%"=="WINNT" SET "MTA_HOME=%~dp0.."
-if not "%MTA_HOME%"=="" goto valFHome
+if "%OS%"=="Windows_NT" SET "WINDUP_HOME=%~dp0.."
+if "%OS%"=="WINNT" SET "WINDUP_HOME=%~dp0.."
+if not "%WINDUP_HOME%"=="" goto valFHome
 
 echo.
-echo ERROR: MTA_HOME not found in your environment.
-echo Please set the MTA_HOME variable in your environment to match the
-echo location of the MTA installation
+echo ERROR: WINDUP_HOME not found in your environment.
+echo Please set the WINDUP_HOME variable in your environment to match the
+echo location of the WINDUP installation
 echo.
 goto error
 
 :valFHome
 
 :stripFHome
-if not "_%MTA_HOME:~-1%"=="_\" goto checkFBat
-set "MTA_HOME=%MTA_HOME:~0,-1%"
+if not "_%WINDUP_HOME:~-1%"=="_\" goto checkFBat
+set "WINDUP_HOME=%WINDUP_HOME:~0,-1%"
 goto stripFHome
 
 :checkFBat
-if exist "%MTA_HOME%\bin\mta-cli.bat" goto init
+if exist "%WINDUP_HOME%\bin\windup-cli.bat" goto init
 
 echo.
-echo ERROR: MTA_HOME is set to an invalid directory.
-echo MTA_HOME = "%MTA_HOME%"
-echo Please set the MTA_HOME variable in your environment to match the
-echo location of the MTA installation
+echo ERROR: WINDUP_HOME is set to an invalid directory.
+echo WINDUP_HOME = "%WINDUP_HOME%"
+echo Please set the WINDUP_HOME variable in your environment to match the
+echo location of the WINDUP installation
 echo.
 goto error
 @REM ==== END VALIDATION ====
@@ -139,8 +139,8 @@ goto error
 @REM Initializing the argument line
 :init
 setlocal enableextensions enableDelayedExpansion
-set MTA_CMD_LINE_ARGS=
-set MTA_DEBUG_ARGS=
+set WINDUP_CMD_LINE_ARGS=
+set WINDUP_DEBUG_ARGS=
 set OR_CMD_LINE_ARGS=
 set RUN_OPENREWRITE=false
 set OR_GOAL=dryRun
@@ -168,7 +168,7 @@ for %%x in (%args%) do (
     set "arg=%%~x"
     set "arg=!arg::comma:=,!"
     set "arg=!arg::semicolon:=;!"
-    if "!arg!"=="--debug" set MTA_DEBUG_ARGS=-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000
+    if "!arg!"=="--debug" set WINDUP_DEBUG_ARGS=-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000
     if "!arg!"=="--input" (
         set "OR_REMOVE_ARG=true"
 	set /A y=!COUNT! + 1
@@ -191,7 +191,7 @@ for %%x in (%args%) do (
     )
 
     if !OR_REMOVE_ARG!==false set "OR_CMD_LINE_ARGS=!OR_CMD_LINE_ARGS! "!arg!""
-    set "MTA_CMD_LINE_ARGS=!MTA_CMD_LINE_ARGS! "!arg!""
+    set "WINDUP_CMD_LINE_ARGS=!WINDUP_CMD_LINE_ARGS! "!arg!""
     set /A COUNT=!COUNT! + 1
 )
 
@@ -204,12 +204,12 @@ goto initArgs
 @REM Reaching here means variables are defined and arguments have been captured
 :endInit
 
-SET MTA_JAVA_EXE="%JAVA_HOME%\bin\java.exe"
+SET WINDUP_JAVA_EXE="%JAVA_HOME%\bin\java.exe"
 
 @REM -- 4NT shell
 if "%@eval[2+2]" == "4" goto 4NTCWJars
 
-if %RUN_OPENREWRITE%==false goto runMTA_CLI
+if %RUN_OPENREWRITE%==false goto runWINDUP_CLI
 
 :runOpenrewrite
 PUSHD "%OR_TRANSFORM_PATH%"
@@ -219,42 +219,42 @@ POPD
 if ERRORLEVEL 1 goto error
 goto end
 
-@REM Start MTA
-:runMTA_CLI
+@REM Start WINDUP
+:runWINDUP_CLI
 
-echo Using the CLI at %MTA_HOME%
+echo Using the CLI at %WINDUP_HOME%
 echo Using Java at %JAVA_HOME%
 
-if exist "%MTA_HOME%\addons" set ADDONS_DIR=--immutableAddonDir "%MTA_HOME%\addons"
-set MTA_MAIN_CLASS=org.jboss.windup.bootstrap.Bootstrap
+if exist "%WINDUP_HOME%\addons" set ADDONS_DIR=--immutableAddonDir "%WINDUP_HOME%\addons"
+set WINDUP_MAIN_CLASS=org.jboss.windup.bootstrap.Bootstrap
 
 @REM MAX_MEMORY - Maximum Java Heap (example: 2048m)
 @REM MAX_METASPACE_SIZE - Maximum Metaspace size (example: 256m)
 @REM RESERVED_CODE_CACHE_SIZE - Hotspot code cache size (example: 128m)
 if "%MAX_METASPACE_SIZE%" == "" (
-  set MTA_MAX_METASPACE_SIZE=256m
+  set WINDUP_MAX_METASPACE_SIZE=256m
 ) else (
-  set MTA_MAX_METASPACE_SIZE=%MAX_METASPACE_SIZE%
+  set WINDUP_MAX_METASPACE_SIZE=%MAX_METASPACE_SIZE%
 )
 
 if "%RESERVED_CODE_CACHE_SIZE%" == "" (
-  set MTA_RESERVED_CODE_CACHE_SIZE=128m
+  set WINDUP_RESERVED_CODE_CACHE_SIZE=128m
 ) else (
-  set MTA_RESERVED_CODE_CACHE_SIZE=%RESERVED_CODE_CACHE_SIZE%
+  set WINDUP_RESERVED_CODE_CACHE_SIZE=%RESERVED_CODE_CACHE_SIZE%
 )
 
-if "%MTA_OPTS%" == "" (
+if "%WINDUP_OPTS%" == "" (
   if "%MAX_MEMORY%" == "" (
-    set MTA_OPTS_INTERNAL=-XX:MaxMetaspaceSize=%MTA_MAX_METASPACE_SIZE% -XX:ReservedCodeCacheSize=128m
+    set WINDUP_OPTS_INTERNAL=-XX:MaxMetaspaceSize=%WINDUP_MAX_METASPACE_SIZE% -XX:ReservedCodeCacheSize=128m
   ) else (
-    set MTA_OPTS_INTERNAL=-Xmx%MAX_MEMORY% -XX:MaxMetaspaceSize=%MTA_MAX_METASPACE_SIZE% -XX:ReservedCodeCacheSize=128m
+    set WINDUP_OPTS_INTERNAL=-Xmx%MAX_MEMORY% -XX:MaxMetaspaceSize=%WINDUP_MAX_METASPACE_SIZE% -XX:ReservedCodeCacheSize=128m
   )
 ) else (
-  set MTA_OPTS_INTERNAL=%MTA_OPTS%
+  set WINDUP_OPTS_INTERNAL=%WINDUP_OPTS%
 )
 
-%MTA_JAVA_EXE% %MODULES% %MTA_DEBUG_ARGS% %MTA_OPTS_INTERNAL% "-Dforge.standalone=true" "-Dforge.home=%MTA_HOME%" "-Dwindup.home=%MTA_HOME%" ^
-   -cp ".;%MTA_HOME%\lib\*" %MTA_MAIN_CLASS% %MTA_CMD_LINE_ARGS% %ADDONS_DIR%
+%WINDUP_JAVA_EXE% %MODULES% %WINDUP_DEBUG_ARGS% %WINDUP_OPTS_INTERNAL% "-Dforge.standalone=true" "-Dforge.home=%WINDUP_HOME%" "-Dwindup.home=%WINDUP_HOME%" ^
+   -cp ".;%WINDUP_HOME%\lib\*" %WINDUP_MAIN_CLASS% %WINDUP_CMD_LINE_ARGS% %ADDONS_DIR%
 if ERRORLEVEL 1 goto error
 goto end
 
@@ -270,19 +270,19 @@ if "%OS%"=="WINNT" goto endNT
 
 @REM For old DOS remove the set variables from ENV - we assume they were not set
 @REM before we started - at least we don't leave any baggage around
-set MTA_JAVA_EXE=
-set MTA_CMD_LINE_ARGS=
-set MTA_OPTS_INTERNAL=
-set MTA_MAX_METASPACE_SIZE=
-set MTA_RESERVED_CODE_CACHE_SIZE=
+set WINDUP_JAVA_EXE=
+set WINDUP_CMD_LINE_ARGS=
+set WINDUP_OPTS_INTERNAL=
+set WINDUP_MAX_METASPACE_SIZE=
+set WINDUP_RESERVED_CODE_CACHE_SIZE=
 goto postExec
 
 :endNT
 @endlocal & set ERROR_CODE=%ERROR_CODE%
 
 :postExec
-if exist "%USERHOME%\mtarc_post.bat" call "%USERHOME%\mtarc_post.bat"
+if exist "%USERHOME%\winduprc_post.bat" call "%USERHOME%\winduprc_post.bat"
 
-if "%MTA_TERMINATE_CMD%" == "on" exit %ERROR_CODE%
+if "%WINDUP_TERMINATE_CMD%" == "on" exit %ERROR_CODE%
 
 cmd /C exit /B %ERROR_CODE%

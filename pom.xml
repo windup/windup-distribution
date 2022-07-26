@@ -300,10 +300,10 @@
                                     <phase>package</phase>
                                     <configuration>
                                         <licensesOutputDirectory>
-                                            ${project.build.directory}/mta-distribution-${project.version}/docs/licenses
+                                            ${project.build.directory}/windup-distribution-${project.version}/docs/licenses
                                         </licensesOutputDirectory>
                                         <licensesOutputFile>
-                                            ${project.build.directory}/mta-distribution-${project.version}/docs/licenses/licenses.xml
+                                            ${project.build.directory}/windup-distribution-${project.version}/docs/licenses/licenses.xml
                                         </licensesOutputFile>
                                     </configuration>
                                 </execution>
@@ -360,12 +360,36 @@
         </profile>
 
         <profile>
-            <id>mta</id>
+            <id>windup</id>
             <activation>
                 <property>
                     <name>!downstream</name>
                 </property>
             </activation>
+            <properties>
+                <product-name>windup</product-name>
+            </properties>
+            <modules>
+                <module>windup-cli</module>
+            </modules>
+            <build>
+                <finalName>windup-cli-${project.version}</finalName>
+            </build>
+        </profile>
+        <profile>
+            <id>mta</id>
+            <activation>
+                <property>
+                    <name>downstream</name>
+                    <value>mta</value>
+                </property>
+            </activation>
+            <properties>
+                <product-name>mta</product-name>
+            </properties>
+            <build>
+                <finalName>mta-cli-${project.version}</finalName>
+            </build>
             <modules>
                 <module>mta-cli</module>
             </modules>
@@ -378,9 +402,15 @@
                     <value>tackle</value>
                 </property>
             </activation>
+            <properties>
+                <product-name>tackle</product-name>
+            </properties>
             <modules>
                 <module>tackle-cli</module>
             </modules>
+            <build>
+                <finalName>tackle-cli-${project.version}</finalName>
+            </build>
         </profile>
 
     </profiles>
