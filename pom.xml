@@ -186,7 +186,7 @@
                             </goals>
                             <configuration>
                                 <descriptors>
-                                    <descriptor>src/main/assembly/assembly-offline.xml</descriptor>
+                                    <descriptor>${multi.module.project.basedir}/src/main/assembly/assembly-offline.xml</descriptor>
                                 </descriptors>
                             </configuration>
                         </execution>
@@ -198,7 +198,7 @@
                             </goals>
                             <configuration>
                                 <descriptors>
-                                    <descriptor>src/main/assembly/assembly-no-index.xml</descriptor>
+                                    <descriptor>${multi.module.project.basedir}/src/main/assembly/assembly-no-index.xml</descriptor>
                                 </descriptors>
                             </configuration>
                         </execution>
@@ -207,6 +207,24 @@
             </plugins>
         </pluginManagement>
         <plugins>
+            <plugin>
+                <groupId>org.commonjava.maven.plugins</groupId>
+                <artifactId>directory-maven-plugin</artifactId>
+                <version>1.0</version>
+                <executions>
+                    <execution>
+                        <id>directories</id>
+                        <goals>
+                            <goal>highest-basedir</goal>
+                        </goals>
+                        <phase>initialize</phase>
+                        <configuration>
+                            <property>multi.module.project.basedir</property>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <!-- This declaration makes sure children get plugin in their lifecycle -->
                 <groupId>org.jboss.forge.furnace</groupId>
