@@ -19,7 +19,7 @@ To build this project, type:
 
         mvn clean install
 
-This creates a `windup-distribution-<VERSION>-offline.zip` file in the `windup-distribution/target/` directory.
+This creates a `windup-cli-<VERSION>-offline.zip` file in the `windup-cli/target/` directory.
 
 == Additional Resources
 
