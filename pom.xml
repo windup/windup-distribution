@@ -431,7 +431,24 @@
                 <finalName>tackle-cli-${project.version}</finalName>
             </build>
         </profile>
-
+        <profile>
+            <id>mtr</id>
+            <activation>
+                <property>
+                    <name>downstream</name>
+                    <value>mtr</value>
+                </property>
+            </activation>
+            <properties>
+                <product-name>mtr</product-name>
+            </properties>
+            <build>
+                <finalName>mtr-cli-${project.version}</finalName>
+            </build>
+            <modules>
+                <module>mtr-cli</module>
+            </modules>
+        </profile>
     </profiles>
 
     <scm>
