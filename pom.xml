@@ -76,6 +76,11 @@
             </exclusions>
         </dependency>
         <dependency>
+            <groupId>org.jboss.windup.maven</groupId>
+            <artifactId>nexus-indexer-data-text</artifactId>
+            <type>zip</type>
+        </dependency>
+        <dependency>
             <groupId>org.jboss.windup.rules</groupId>
             <artifactId>windup-rulesets</artifactId>
             <scope>provided</scope>
@@ -200,6 +205,18 @@
                             <configuration>
                                 <descriptors>
                                     <descriptor>${multi.module.project.basedir}/src/main/assembly/assembly-no-index.xml</descriptor>
+                                </descriptors>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>distribution-offline-lucene</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>single</goal>
+                            </goals>
+                            <configuration>
+                                <descriptors>
+                                    <descriptor>${multi.module.project.basedir}/src/main/assembly/assembly-offline-lucene.xml</descriptor>
                                 </descriptors>
                             </configuration>
                         </execution>
