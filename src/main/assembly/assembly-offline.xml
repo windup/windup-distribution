@@ -12,7 +12,7 @@
     <!-- Add distribution files -->
     <fileSets>
         <fileSet>
-            <directory>src/main/resources</directory>
+            <directory>../src/main/resources</directory>
             <outputDirectory/>
             <filtered>true</filtered>
             <includes>
@@ -21,7 +21,7 @@
             </includes>
         </fileSet>
         <fileSet>
-            <directory>src/main/resources</directory>
+            <directory>../src/main/resources</directory>
             <outputDirectory/>
             <filtered>false</filtered>
             <includes>
