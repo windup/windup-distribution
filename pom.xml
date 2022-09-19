@@ -53,17 +53,13 @@
            </dependency>
            <dependency>
                 <groupId>org.jboss.windup.rules</groupId>
-                <artifactId>windup-rulesets</artifactId>
+                <artifactId>windup-rulesets-parent</artifactId>
                 <version>${version.windup-rulesets}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
-        <dependency>
-            <groupId>org.jboss.windup</groupId>
-            <artifactId>windup-bootstrap</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.jboss.windup.maven</groupId>
             <artifactId>nexus-indexer-data</artifactId>
@@ -74,11 +70,6 @@
                     <artifactId>nexus-indexer</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.windup.rules</groupId>
-            <artifactId>windup-rulesets</artifactId>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -131,14 +122,7 @@
                                 <goal>unpack</goal>
                             </goals>
                             <configuration>
-                                <artifactItems>
-                                    <artifactItem>
-                                        <groupId>org.jboss.windup.rules</groupId>
-                                        <artifactId>windup-rulesets</artifactId>
-                                        <overWrite>true</overWrite>
-                                        <outputDirectory>${project.build.directory}/rules</outputDirectory>
-                                    </artifactItem>
-                                </artifactItems>
+                                <outputDirectory>${project.build.directory}/rules</outputDirectory>
                                 <excludes>**/tests/**</excludes>
                             </configuration>
                         </execution>
@@ -382,7 +366,7 @@
             <id>windup</id>
             <activation>
                 <property>
-                    <name>!downstream</name>
+                    <name>!skipThemeWindup</name>
                 </property>
             </activation>
             <properties>
@@ -397,12 +381,6 @@
         </profile>
         <profile>
             <id>mta</id>
-            <activation>
-                <property>
-                    <name>downstream</name>
-                    <value>mta</value>
-                </property>
-            </activation>
             <properties>
                 <product-name>mta</product-name>
             </properties>
@@ -415,12 +393,6 @@
         </profile>
         <profile>
             <id>tackle</id>
-            <activation>
-                <property>
-                    <name>downstream</name>
-                    <value>tackle</value>
-                </property>
-            </activation>
             <properties>
                 <product-name>tackle</product-name>
             </properties>
@@ -433,12 +405,6 @@
         </profile>
         <profile>
             <id>mtr</id>
-            <activation>
-                <property>
-                    <name>downstream</name>
-                    <value>mtr</value>
-                </property>
-            </activation>
             <properties>
                 <product-name>mtr</product-name>
             </properties>
