@@ -10,6 +10,34 @@
     </parent>
 
     <artifactId>mta-cli</artifactId>
-    <name>MTA - Distribution Build</name>
+    <name>Windup - Distribution Build MTA</name>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.jboss.windup</groupId>
+            <artifactId>windup-bootstrap-mta</artifactId>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>unpack</id>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.jboss.windup.rules</groupId>
+                                    <artifactId>windup-rulesets-mta</artifactId>
+                                    <version>${version.windup-rulesets}</version>
+                                    <overWrite>true</overWrite>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
