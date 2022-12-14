@@ -6,10 +6,38 @@
     <parent>
         <groupId>org.jboss.windup</groupId>
         <artifactId>windup-cli-parent</artifactId>
-        <version>6.0.1-SNAPSHOT</version>
+        <version>6.2.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>tackle-cli</artifactId>
-    <name>Tackle - Distribution Build</name>
+    <name>Windup - Distribution Build Tackle</name>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.jboss.windup</groupId>
+            <artifactId>windup-bootstrap-tackle</artifactId>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>unpack</id>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.jboss.windup.rules</groupId>
+                                    <artifactId>windup-rulesets-tackle</artifactId>
+                                    <version>${version.windup-rulesets}</version>
+                                    <overWrite>true</overWrite>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
