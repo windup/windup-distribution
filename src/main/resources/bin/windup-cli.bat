@@ -91,9 +91,13 @@ if %JAVAVER_MAJOR% equ 11 (
     SET MODULES="--add-modules=java.se"
     goto chkFHome
 )
+if %JAVAVER_MAJOR% equ 17 (
+    SET MODULES="--add-modules=java.se --add-exports=java.naming/com.sun.jndi.ldap=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.invoke=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.base/java.security=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.management/javax.management=ALL-UNNAMED --add-opens=java.naming/javax.naming=ALL-UNNAMED --add-opens=java.base/java.util.stream=ALL-UNNAMED"
+    goto chkFHome
+)
 
 echo.
-echo A Java 11 JRE is required to run WINDUP. "%JAVA_HOME%\bin\java.exe" is version %JAVAVER%
+echo A Java 11 or 17 JRE is required to run WINDUP. "%JAVA_HOME%\bin\java.exe" is version %JAVAVER%
 echo.
 goto error
 
