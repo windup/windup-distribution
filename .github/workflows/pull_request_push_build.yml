@@ -82,6 +82,7 @@ jobs:
           enableCrossOsArchive: true
           fail-on-cache-miss: true
           restore-keys: |
+            maven-windup-build-${{ github.sha }}
             maven-windup-rulesets-build-${{ github.sha }}
       - name: Set up Maven
         uses: stCarolas/setup-maven@v4.5
