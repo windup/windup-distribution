@@ -23,7 +23,5 @@ jobs:
         java-version: '11'
         distribution: ${{ matrix.jdk-distribution }}
         cache: 'maven'
-    - name: Maven version
-      run: mvn -version
     - name: Maven build
       run: mvn clean install -DskipTests -B -s build/settings.xml
