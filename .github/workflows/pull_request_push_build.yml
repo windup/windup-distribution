@@ -81,5 +81,9 @@ jobs:
         key: maven-windup-cli-build-${{ github.sha }}
         restore-keys: |
           maven-windup-rulesets-build-${{ github.sha }}
+    - name: Set up Maven
+      uses: stCarolas/setup-maven@v4.5
+      with:
+        maven-version: 3.8.7
     - name: Maven build
       run: mvn clean install -DskipTests -B -s build/settings.xml
