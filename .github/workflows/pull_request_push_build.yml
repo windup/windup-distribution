@@ -2,9 +2,13 @@ name: Windup PR builder
 
 on:
   pull_request:
-    branches: [ master ]
+    branches:
+      - master
+      - 'releases/**'
   push:
-    branches: [ master ]
+    branches:
+      - master
+      - 'releases/**'
 
 jobs:
   windup-build:
