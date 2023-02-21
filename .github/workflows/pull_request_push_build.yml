@@ -79,6 +79,8 @@ jobs:
       with:
         path: ~/.m2/repository
         key: maven-windup-cli-build-${{ github.sha }}
+        enableCrossOsArchive: true
+        fail-on-cache-miss: true
         restore-keys: |
           maven-windup-rulesets-build-${{ github.sha }}
     - name: Maven build
