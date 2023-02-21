@@ -223,7 +223,7 @@
                 <groupId>org.jboss.forge.furnace</groupId>
                 <artifactId>furnace-maven-plugin</artifactId>
                 <!-- Configuration won't be propagated to children -->
-                <inherited>true</inherited>
+                <inherited>false</inherited>
                 <executions>
                     <execution>
                         <!--This matches and thus overrides execution defined above -->
