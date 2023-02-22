@@ -77,12 +77,10 @@ jobs:
       - name: Cache local Maven repository
         uses: actions/cache@v3
         with:
-          path: ~/.m2/repository
           key: maven-windup-cli-build-${{ github.sha }}
           enableCrossOsArchive: true
           fail-on-cache-miss: true
           restore-keys: |
-            maven-windup-build-${{ github.sha }}
             maven-windup-rulesets-build-${{ github.sha }}
       - name: Set up Maven
         uses: stCarolas/setup-maven@v4.5
