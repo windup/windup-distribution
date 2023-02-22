@@ -28,10 +28,10 @@ jobs:
       - name: Cache local Maven repository
         uses: actions/cache@v3
         with:
-          path: ~/.m2/repository
+          path: .m2
           key: maven-windup-build-${{ github.sha }}
       - name: Build Windup on JDK 11
-        run: mvn -B clean install -DskipTests
+        run: mvn -B clean install -DskipTests -Dmaven.repo.local=.m2
 
   windup-rulesets-build:
     runs-on: ubuntu-latest
@@ -51,12 +51,12 @@ jobs:
       - name: Cache local Maven repository
         uses: actions/cache@v3
         with:
-          path: ~/.m2/repository
+          path: .m2
           key: maven-windup-rulesets-build-${{ github.sha }}
           restore-keys: |
             maven-windup-build-${{ github.sha }}
       - name: Build Windup Rulesets
-        run: mvn -B clean install -DskipTests
+        run: mvn -B clean install -DskipTests -Dmaven.repo.local=.m2
 
   windup-cli-build:
     strategy:
