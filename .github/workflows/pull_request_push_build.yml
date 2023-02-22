@@ -63,7 +63,7 @@ jobs:
       fail-fast: false
       matrix:
         jdk-distribution: [ temurin ]
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     needs: [windup-rulesets-build]
     steps:
@@ -89,3 +89,39 @@ jobs:
         maven-version: 3.8.7
     - name: Maven build
       run: mvn clean install -DskipTests -B -s build/settings.xml
+
+  Windows-windup-cli-build:
+    runs-on: windows-latest
+    steps:
+    - name: Checkout windup project
+      uses: actions/checkout@v3
+      with:
+        repository: windup/windup
+        ref: ${{ github.base_ref }}
+        path: windup
+    - name: Checkout windup-rulesets project
+      uses: actions/checkout@v3
+      with:
+        repository: windup/windup-rulesets
+        ref: ${{ github.base_ref }}
+        path: windup-rulesets
+    - name: Checkout PR code
+      uses: actions/checkout@v3
+      with:
+        path: windup-distribution
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: temurin
+        cache: 'maven'
+    - name: Set up Maven
+      uses: stCarolas/setup-maven@v4.5
+      with:
+        maven-version: 3.8.7
+    - name: Build Windup dependencies
+      run: |
+        mvn install -DskipTests -f windup
+        mvn install -DskipTests -f windup-rulesets
+    - name: Maven build
+      run: mvn clean install -DskipTests -B -s build/settings.xml -f windup-distribution
