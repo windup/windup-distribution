@@ -124,4 +124,4 @@ jobs:
         mvn install -DskipTests -f windup
         mvn install -DskipTests -f windup-rulesets
     - name: Maven build
-      run: mvn clean install -DskipTests -B -s build/settings.xml -f windup-distribution
+      run: mvn clean install -DskipTests -B -s windup-distribution/build/settings.xml -f windup-distribution
