@@ -90,7 +90,7 @@ jobs:
         with:
           maven-version: 3.8.7
       - name: Maven build
-        run: mvn clean install -DskipTests -B -s build/settings.xml -Dmaven.repo.local=.m2
+        run: mvn clean install -DskipTests -B -s build/settings.xml -D"maven.repo.local=.m2"
 
 #  windup-cli-build:
 #    strategy:
