@@ -218,12 +218,12 @@ if [ ! -x "$JAVACMD" ] ; then
 fi
 
 MODULES=""
-JAVAVER=`"$JAVACMD" -version 2>&1`
+JAVAVER=`"$JAVACMD" -version 2>&1 | head -n 1 | cut -d '"' -f2`
 case $JAVAVER in
-*"11"*)
+"11."*)
   MODULES="--add-modules=java.se"
  ;;
-*"17"*)
+"17."*)
   MODULES="--add-modules=java.se --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.stream=ALL-UNNAMED"
  ;;
 *)
