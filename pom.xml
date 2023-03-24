@@ -131,19 +131,24 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>exec-maven-plugin</artifactId>
+                    <version>3.1.0</version>
                     <executions>
                         <execution>
                             <id>build-dump</id>
                             <phase>package</phase>
                             <goals>
-                                <goal>java</goal>
+                                <goal>exec</goal>
                             </goals>
                         </execution>
                     </executions>
                     <configuration>
-                        <mainClass>org.jboss.windup.bootstrap.Bootstrap</mainClass>
-                        <cleanupDaemonThreads>false</cleanupDaemonThreads>
+                        <addResourcesToClasspath>true</addResourcesToClasspath>
+                        <executable>java</executable>
                         <arguments>
+                            <argument>-classpath</argument>
+                            <classpath/>
+                            <argument>-Dwindup.home=${project.build.directory}</argument>
+                            <argument>org.jboss.windup.bootstrap.Bootstrap</argument>
                             <argument>--addonDir</argument>
                             <argument>${project.build.directory}/addons</argument>
                             <argument>--batchMode</argument>
@@ -151,12 +156,10 @@
                             <argument>--userRulesDirectory</argument>
                             <argument>${project.build.directory}/rules</argument>
                         </arguments>
-                        <systemProperties>
-                            <systemProperty>
-                                <key>windup.home</key>
-                                <value>${project.build.directory}/</value>
-                            </systemProperty>
-                        </systemProperties>
+                        <successCodes>
+                            <successCode>0</successCode>
+                            <successCode>1</successCode>
+                        </successCodes>
                     </configuration>
                 </plugin>
                 <plugin>
