@@ -106,6 +106,7 @@
                                     <addonId>org.jboss.windup.rules.apps:windup-rules-tattletale,${version.windup}</addonId>
                                     <addonId>org.jboss.windup.rules.apps:windup-rules-java-diva,${version.windup}</addonId>
                                     <addonId>org.jboss.windup.rules.apps:windup-rules-yaml,${version.windup}</addonId>
+                                    <addonId>org.jboss.windup.reporting:windup-reporting-data,${version.windup}</addonId>
                                 </addonIds>
                             </configuration>
                         </execution>
