@@ -15,14 +15,14 @@
 
     <groupId>org.jboss.windup</groupId>
     <artifactId>windup-cli-parent</artifactId>
-    <version>6.1.8-SNAPSHOT</version>
+    <version>6.1.8.Final</version>
 
     <name>Windup - Distribution Build Parent</name>
     <packaging>pom</packaging>
 
     <properties>
-        <version.windup>6.1.8-SNAPSHOT</version.windup>
-        <version.windup-rulesets>6.1.8-SNAPSHOT</version.windup-rulesets>
+        <version.windup>6.1.8.Final</version.windup>
+        <version.windup-rulesets>6.1.8.Final</version.windup-rulesets>
         <version.forge>3.10.0.Final</version.forge>
         <version.furnace>2.29.1.Final</version.furnace>
 
