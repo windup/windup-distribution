@@ -217,7 +217,7 @@ if %RUN_OPENREWRITE%==false goto runWINDUP_CLI
 
 :runOpenrewrite
 PUSHD "%OR_TRANSFORM_PATH%"
-mvn "org.openrewrite.maven:rewrite-maven-plugin:4.25.0:%OR_GOAL%"  %OR_CMD_LINE_ARGS%
+mvn "org.openrewrite.maven:rewrite-maven-plugin:4.44.0:%OR_GOAL%"  %OR_CMD_LINE_ARGS%
 POPD
 
 if ERRORLEVEL 1 goto error
