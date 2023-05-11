@@ -2,7 +2,7 @@
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
 
-    <id>offline</id>
+    <id>offline-lucene</id>
     <formats>
         <format>zip</format>
     </formats>
@@ -77,11 +77,11 @@
         </dependencySet>
 
         <dependencySet>
-            <outputDirectory>cache/nexus-indexer-data/text</outputDirectory>
+            <outputDirectory>cache/nexus-indexer-data/lucene</outputDirectory>
             <useProjectArtifact>false</useProjectArtifact>
             <unpack>true</unpack>
             <includes>
-                <include>org.jboss.windup.maven:nexus-indexer-data-text:zip:*</include>
+                <include>org.jboss.windup.maven:nexus-indexer-data:zip:*</include>
             </includes>
         </dependencySet>
     </dependencySets>
