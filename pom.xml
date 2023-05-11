@@ -79,6 +79,7 @@
         <dependency>
             <groupId>org.jboss.windup.rules</groupId>
             <artifactId>windup-rulesets</artifactId>
+            <version>${version.windup-rulesets}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
