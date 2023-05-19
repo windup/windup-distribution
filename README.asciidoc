@@ -17,7 +17,7 @@ More detailed instructions are located here: https://github.com/windup/windup/wi
 
 To build this project, type:
 
-        mvn clean install
+        ./mvnw clean install
 
 This creates a `windup-distribution-<VERSION>-offline.zip` file in the `windup-distribution/target/` directory.
 
