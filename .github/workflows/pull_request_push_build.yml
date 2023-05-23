@@ -122,7 +122,7 @@ jobs:
         cache: 'maven'
     - name: Build Windup dependencies
       run: |
-        ./mvnw install -DskipTests -f windup
-        ./mvnw install -DskipTests -f windup-rulesets
+        ./windup/mvnw install -DskipTests -f windup
+        ./windup-rulesets/mvnw install -DskipTests -f windup-rulesets
     - name: Maven build
-      run: ./mvnw clean install -DskipTests -B -s windup-distribution/build/settings.xml -f windup-distribution
+      run: ./windup-distribution/mvnw clean install -DskipTests -B -s windup-distribution/build/settings.xml -f windup-distribution
