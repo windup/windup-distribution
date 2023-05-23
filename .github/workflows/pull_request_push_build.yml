@@ -122,7 +122,7 @@ jobs:
         cache: 'maven'
     - name: Build Windup dependencies
       run: |
-        ./windup/mvnw install -DskipTests -f windup
-        ./windup-rulesets/mvnw install -DskipTests -f windup-rulesets
+        ./windup/${{ matrix.os != 'windows-latest' && 'mvnw' || 'mvnw.cmd' }} install -DskipTests -f windup
+        ./windup-rulesets/${{ matrix.os != 'windows-latest' && 'mvnw' || 'mvnw.cmd' }} install -DskipTests -f windup-rulesets
     - name: Maven build
-      run: ./windup-distribution/mvnw clean install -DskipTests -B -s windup-distribution/build/settings.xml -f windup-distribution
+      run: ./windup-distribution/${{ matrix.os != 'windows-latest' && 'mvnw' || 'mvnw.cmd' }} clean install -DskipTests -B -s windup-distribution/build/settings.xml -f windup-distribution
