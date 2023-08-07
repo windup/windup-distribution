@@ -86,13 +86,14 @@ for /f "delims=. tokens=1-3" %%v in ("%JAVAVER%") do (
    set JAVAVER_MINOR=%%w
 )
 set "JAVAVER_MAJOR=%JAVAVER_MAJOR:~1,2%"
+
 set MODULES=
 if %JAVAVER_MAJOR% equ 11 (
-    SET MODULES="--add-modules=java.se"
+    SET MODULES=--add-modules=java.se
     goto chkFHome
 )
 if %JAVAVER_MAJOR% equ 17 (
-    SET MODULES="--add-modules=java.se --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.stream=ALL-UNNAMED"
+    SET MODULES=--add-modules=java.se --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.stream=ALL-UNNAMED
     goto chkFHome
 )
 
