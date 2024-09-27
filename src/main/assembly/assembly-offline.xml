@@ -72,15 +72,16 @@
             <useProjectArtifact>false</useProjectArtifact>
             <excludes>
                 <exclude>org.jboss.windup.maven:nexus-indexer-data:zip:*</exclude>
+                <exclude>org.jboss.windup.maven:nexus-indexer-data-text:zip:*</exclude>
             </excludes>
         </dependencySet>
 
         <dependencySet>
-            <outputDirectory>cache/nexus-indexer-data/</outputDirectory>
+            <outputDirectory>cache/nexus-indexer-data/text</outputDirectory>
             <useProjectArtifact>false</useProjectArtifact>
             <unpack>true</unpack>
             <includes>
-                <include>org.jboss.windup.maven:nexus-indexer-data:zip:*</include>
+                <include>org.jboss.windup.maven:nexus-indexer-data-text:zip:*</include>
             </includes>
         </dependencySet>
     </dependencySets>

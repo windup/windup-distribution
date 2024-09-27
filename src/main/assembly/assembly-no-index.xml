@@ -71,6 +71,7 @@
             <useProjectArtifact>false</useProjectArtifact>
             <excludes>
                 <exclude>org.jboss.windup.maven:nexus-indexer-data:zip:*</exclude>
+                <exclude>org.jboss.windup.maven:nexus-indexer-data-text:zip:*</exclude>
             </excludes>
         </dependencySet>
     </dependencySets>
